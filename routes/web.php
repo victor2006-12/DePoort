@@ -7,6 +7,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/Afspraak', function () {
+    return view('Afspraak');
+});
+
+Route::get('/Contact', function () {
+    return view('Contact');
+});
+
+Route::get('/Overons', function () {
+    return view('Overons');
+});
+
+Route::get('/artikelen', function () {
+    return view('artikelen');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
