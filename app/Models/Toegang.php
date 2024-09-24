@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Toegang extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'toegang_id',
+        'gebruikers_id',
+        'dokter_id',
+        'verzoek_toegang',
+        'afspraak_toegang',
+    ];
 }

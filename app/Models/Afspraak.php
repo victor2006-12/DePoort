@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Afspraak extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'afspraak_id',
+        'gebruikers_id',
+        'dokter_id',
+        'datum_afspraak',
+        'tijd_afspraak',
+        'onderwerp_afspraak',
+        'consult'
+    ];
 }
