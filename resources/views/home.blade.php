@@ -1,5 +1,34 @@
 @extends('layout')
 
+@section('styles')
+<style>
+    /* Zorgt ervoor dat de pagina de volledige hoogte heeft en de footer onderaan blijft */
+    html, body {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Zorgt ervoor dat de content de resterende ruimte vult */
+    .content {
+        flex: 1;
+    }
+
+    /* Footer styling */
+    footer {
+        background-color: #343a40;
+        color: white;
+        padding: 20px 0;
+        width: 100%;
+    }
+
+    footer .social-icons a {
+        color: white;
+        margin: 0 10px;
+    }
+</style>
+@endsection
+
 @section('content')
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -27,7 +56,7 @@
                     <a class="nav-link" href="Artikelen#">Artikelen</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact#">Contact & Info</a>
+                    <a class="nav-link" href="Contact#">Contact & Info</a>
                 </li>
             </ul>
         </div>
@@ -67,70 +96,19 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">Gezonde voeding</h5>
+                            <p class="card-text">
+                                Een gebalanceerd dieet met voldoende fruit, groenten en vezels kan de kans op chronische ziekten aanzienlijk verlagen.
+                            </p>
+                            <p class="card-text"><small class="text-body-secondary">Laatste update: 2 uur geleden</small></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Voeg hier meer kaarten toe, zoals in het eerste voorbeeld -->
+
     </div>
 </div>
 
-<footer class="bg-dark text-white mt-5" style="margin-top: auto;">
-    <div class="container py-4">
-        <div class="row align-items-center">
-            <!-- Logo and Name -->
-            <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
-                <img src="{{ asset('image/logopancake1.jpg') }}" alt="DePoort Logo" class="me-3" style="width: 50px;">
-                <span style="font-size: 24px;">DePoort</span>
-            </div>
-            <!-- Social Media Links -->
-            <div class="col-md-6 text-md-end">
-                <a href="#" class="text-white me-3">
-                    <i class="bi bi-facebook"></i> Facebook
-                </a>
-                <a href="#" class="text-white me-3">
-                    <i class="bi bi-twitter"></i> Twitter
-                </a>
-                <a href="#" class="text-white">
-                    <i class="bi bi-instagram"></i> Instagram
-                </a>
-            </div>
-        </div>
-        <div class="text-center pt-3">
-            <p class="mb-0">© 2024 DePoort. Alle rechten voorbehouden.</p>
-        </div>
-    </div>
-</footer>
-
 @endsection
-
-@section('styles')
-<style>
-    /* Zorgt ervoor dat de pagina de volledige hoogte heeft en de footer onderaan blijft */
-    html, body {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Zorgt ervoor dat de content de resterende ruimte vult */
-    .content {
-        flex: 1;
-    }
-
-    /* Footer styling */
-    footer {
-        background-color: #343a40;
-        color: white;
-        padding: 20px 0;
-        width: 100%;
-        margin-top: auto; /* Zorg ervoor dat de footer onderaan blijft */
-    }
-
-    footer .social-icons a {
-        color: white;
-        margin: 0 10px;
-    }
-</style>
-@endsection  
