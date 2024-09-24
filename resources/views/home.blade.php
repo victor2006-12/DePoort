@@ -1,5 +1,34 @@
 @extends('layout')
 
+@section('styles')
+<style>
+    /* Zorgt ervoor dat de pagina de volledige hoogte heeft en de footer onderaan blijft */
+    html, body {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Zorgt ervoor dat de content de resterende ruimte vult */
+    .content {
+        flex: 1;
+    }
+
+    /* Footer styling */
+    footer {
+        background-color: #343a40;
+        color: white;
+        padding: 20px 0;
+        width: 100%;
+    }
+
+    footer .social-icons a {
+        color: white;
+        margin: 0 10px;
+    }
+</style>
+@endsection
+
 @section('content')
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -27,7 +56,7 @@
                     <a class="nav-link" href="Artikelen#">Artikelen</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact#">Contact & Info</a>
+                    <a class="nav-link" href="Contact#">Contact & Info</a>
                 </li>
             </ul>
         </div>
@@ -67,32 +96,19 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">Gezonde voeding</h5>
-   
-                            @section('styles')
-<style>
-    /* Zorgt ervoor dat de pagina de volledige hoogte heeft en de footer onderaan blijft */
-    html, body {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
+                            <p class="card-text">
+                                Een gebalanceerd dieet met voldoende fruit, groenten en vezels kan de kans op chronische ziekten aanzienlijk verlagen.
+                            </p>
+                            <p class="card-text"><small class="text-body-secondary">Laatste update: 2 uur geleden</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    /* Zorgt ervoor dat de content de resterende ruimte vult */
-    .content {
-        flex: 1;
-    }
+        <!-- Voeg hier meer kaarten toe, zoals in het eerste voorbeeld -->
 
-    /* Footer styling */
-    footer {
-        background-color: #343a40;
-        color: white;
-        padding: 20px 0;
-        width: 100%;
-    }
+    </div>
+</div>
 
-    footer .social-icons a {
-        color: white;
-        margin: 0 10px;
-    }
-</style>
 @endsection
