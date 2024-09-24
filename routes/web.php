@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/home', function () {
@@ -23,8 +23,8 @@ Route::get('/Overons', function () {
     return view('Overons');
 });
 
-Route::get('/artikelen', function () {
-    return view('artikelen');
+Route::get('/Artikelen', function () {
+    return view('Artikelen');
 });
 
 Route::get('/dashboard', function () {
