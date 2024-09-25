@@ -41,29 +41,34 @@
     <p>Maak hieronder een afspraak door het formulier in te vullen.</p>
     
     <form action="/submit-appointment" method="POST">
-        @csrf
-        <div class="mb-3">
-            <label for="name" class="form-label">Naam</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-        </div>
-        <div class="mb-3">
-            <label for="date" class="form-label">Datum</label>
-            <input type="date" class="form-control" id="date" name="date" required>
-        </div>
-        <div class="mb-3">
-            <label for="time" class="form-label">Tijd</label>
-            <input type="time" class="form-control" id="time" name="time" required>
-        </div>
-        <div class="mb-3">
-            <label for="message" class="form-label">Bericht</label>
-            <textarea class="form-control" id="message" name="message" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Afspraak maken</button>
-    </form>
+    @csrf
+    <div class="mb-3">
+        <label for="gebruikers_id" class="form-label">Gebruikers ID (voor nu invullen met 1)</label>
+        <input type="number" class="form-control" id="gebruikers_id" name="gebruikers_id" value="1" required>
+    </div>
+    <div class="mb-3">
+        <label for="dokter_id" class="form-label">Dokter ID (voor nu invullen met 1)</label>
+        <input type="number" class="form-control" id="dokter_id" name="dokter_id" value="1" required>
+    </div>
+    <div class="mb-3">
+        <label for="datum_afspraak" class="form-label">Datum</label>
+        <input type="date" class="form-control" id="datum_afspraak" name="datum_afspraak" required>
+    </div>
+    <div class="mb-3">
+        <label for="tijd_afspraak" class="form-label">Tijd</label>
+        <input type="time" class="form-control" id="tijd_afspraak" name="tijd_afspraak" required>
+    </div>
+    <div class="mb-3">
+        <label for="onderwerp_afspraak" class="form-label">Onderwerp van de afspraak</label>
+        <input type="text" class="form-control" id="onderwerp_afspraak" name="onderwerp_afspraak" required>
+    </div>
+    <div class="mb-3">
+        <label for="consult" class="form-label">Bericht / Consult</label>
+        <textarea class="form-control" id="consult" name="consult" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Afspraak maken</button>
+</form>
+
 </div>
 
 @endsection
