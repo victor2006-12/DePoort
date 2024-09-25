@@ -1,45 +1,34 @@
 <?php
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AfspraakController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OveronsController;
+use App\Http\Controllers\ArtikelenController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
 
+// Post route for submitting appointments
 Route::post('/submit-appointment', [AppointmentController::class, 'store']);
 
-// Route for the home page
-Route::get('/', function () {
-    return view('client.home'); // Adjusted for the new view path
-});
+// Home page route (including '/home' route)
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index']);  // Add this route for /home
 
-// Route for the /home page
-Route::get('/home', function () {
-    return view('client.home'); // Adjusted for the new view path
-});
+// Afspraak page route
+Route::get('/Afspraak', [AfspraakController::class, 'index']);
 
-// Route for the /Afspraak page
-Route::get('/Afspraak', function () {
-    return view('client.Afspraak'); // Adjusted for the new view path
-});
+// Contact page route
+Route::get('/Contact', [ContactController::class, 'index']);
 
-// Route for the /Contact page
-Route::get('/Contact', function () {
-    return view('client.Contact'); // Adjusted for the new view path
-});
+// Overons page route
+Route::get('/Overons', [OveronsController::class, 'index']);
 
-// Route for the /Overons page
-Route::get('/Overons', function () {
-    return view('client.Overons'); // Adjusted for the new view path
-});
+// Artikelen page route
+Route::get('/Artikelen', [ArtikelenController::class, 'index']);
 
-// Route for the /Artikelen page
-Route::get('/Artikelen', function () {
-    return view('client.Artikelen'); // Adjusted for the new view path
-});
-
-// Route for the dashboard page
-Route::get('/dashboard', function () {
-    return view('client.dashboard'); // Adjusted for the new view path
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Dashboard page route (requires authentication)
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 // Auth middleware group for profile management
 Route::middleware('auth')->group(function () {
