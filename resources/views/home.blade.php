@@ -3,20 +3,6 @@
 @section('styles')
 <link href='css/app.css' rel='stylesheet' />
 <style>
-    html, body {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .content {
-        flex: 1; 
-        display: flex; 
-        justify-content: center;
-        align-items: center; 
-        flex-direction: column;
-    }
-
     .calendars-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr); 
@@ -25,7 +11,7 @@
         width: 100%; 
         max-width: 1200px; 
     }
-
+    	
     /* Calendar container */
     .calendar-container {
         width: 100%; 
@@ -105,7 +91,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #f8f9fa; /* Dezelfde kleur als de navbar */
+        background-color: #f8f9fa;
         padding: 0;
     }
 
@@ -117,29 +103,18 @@
         padding: 0;
     }
 
-    /* Knop container */
-    .nav-button {
-        padding: 10px 15px; /* Padding rond de knoppen */
-        border-radius: 5px; /* Hoekafgeronde knoppen */
-        background-color: #f8f9fa; /* Achtergrondkleur voor knoppen (zelfde als navbar) */
-        border: 1px solid #ced4da; /* Kleine border */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
-        transition: background-color 0.3s, box-shadow 0.3s; /* Transitie-effect */
-    }
-
-    .nav-button:hover {
-        background-color: #e2e6ea; /* Donkerder bij hover */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Zwaardere box shadow bij hover */
-    }
-
     .nav-link {
-        text-decoration: none; /* Geen onderlijning */
-        color: #000; /* Zwarte kleur voor tekst */
+        flex: 1;
+        text-align: center;
     }
 
     .nav-link.active {
         font-weight: bold;
-        color: #007bff; /* Actieve linkkleur */
+        color: #007bff;
+    }
+
+    .nav-link:hover {
+        text-decoration: underline;
     }
 </style>
 @endsection
@@ -168,29 +143,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <div class="nav-button">
-                        <a class="nav-link active" href="{{ url('home') }}">Home</a>
-                    </div>
+                    <a class="nav-link active" href="{{ url('home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <div class="nav-button">
-                        <a class="nav-link" href="{{ url('Afspraak') }}">Afspraak maken</a>
-                    </div>
+                    <a class="nav-link" href="{{ url('Afspraak') }}">Afspraak maken</a>
                 </li>
                 <li class="nav-item">
-                    <div class="nav-button">
-                        <a class="nav-link" href="{{ url('Overons') }}">Over ons</a>
-                    </div>
+                    <a class="nav-link" href="{{ url('Overons') }}">Over ons</a>
                 </li>
                 <li class="nav-item">
-                    <div class="nav-button">
-                        <a class="nav-link" href="{{ url('Artikelen') }}">Artikelen</a>
-                    </div>
+                    <a class="nav-link" href="{{ url('Artikelen') }}">Artikelen</a>
                 </li>
                 <li class="nav-item">
-                    <div class="nav-button">
-                        <a class="nav-link" href="{{ url('Contact') }}">Contact & Info</a>
-                    </div>
+                    <a class="nav-link" href="{{ url('Contact') }}">Contact & Info</a>
                 </li>
             </ul>
         </div>
@@ -271,7 +236,7 @@
                     <div class="time-label">00:00</div>
                 </div>
                 <div id="calendar6"></div>
-            </div>
+            </div>  
         </div>
         <div>
             <div class="day-label">ZO</div>
@@ -288,11 +253,7 @@
     </div>
 </div>
 
-<footer>
-    <div class="container">
-        <p class="text-center">Copyright © 2024 Jouw Bedrijf</p>
-    </div>
-</footer>
+@endsection
 
 @section('scripts')
 <script src='"https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FAmsterdam&bgcolor=%23ffffff&src=ZXJtaW4uYmVzaWM4QGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=bmwuZHV0Y2gjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%2333B679&color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"'></script>
@@ -333,6 +294,4 @@
         });
     });
 </script>
-@endsection
-
 @endsection
