@@ -115,48 +115,6 @@
     }
 </style>
 
-<!-- Header with Logo and Client Info -->
-<div class="header">
-    <div class="logo">
-        <a href="#">
-            <img src="{{ asset('image/logopancake1.jpg') }}" alt="Logo">
-            <span style="font-size: 24px;">DePoort</span>
-        </a>
-    </div>
-    <div class="client-info">
-        <img src="{{ asset('image/client-photo.jpg') }}" alt="Client Photo"> <!-- Replace with actual client photo -->
-        <span>Client Name</span> <!-- Replace with dynamic client name if needed -->
-    </div>
-</div>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active"  href="home#" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Afspraak#">Afspraak maken</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Overons#">Over ons</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Artikelen#">Artikelen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Contact#">Contact & Info</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <div class="container mt-5">
     <h2>Over ons</h2>
