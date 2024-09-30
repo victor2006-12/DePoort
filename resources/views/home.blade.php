@@ -3,20 +3,6 @@
 @section('styles')
 <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css' rel='stylesheet' />
 <style>
-    html, body {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .content {
-        flex: 1; 
-        display: flex; 
-        justify-content: center;
-        align-items: center; 
-        flex-direction: column;
-    }
-
     .calendars-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr); /* Vier kolommen */
@@ -25,7 +11,7 @@
         width: 100%; 
         max-width: 1200px; 
     }
-
+    	
     /* Calendar container */
     .calendar-container {
         width: 100%; 
@@ -63,118 +49,11 @@
         font-family: Arial, sans-serif; /* Arial toegevoegd */
     }
 
-    footer {
-        background-color: #343a40;
-        color: white;
-        padding: 20px 0;
-        width: 100%;
-    }
-
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 20px;
-        background-color: #f8f9fa;
-        border-bottom: 1px solid #e0e0e0;
-        height: 120px;
-    }
-
-    .header img {
-        height: 50px;
-    }
-
-    .client-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .client-info img {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        margin-bottom: 5px;
-    }
-
-    .client-info span {
-        font-size: 18px;
-    }
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #f8f9fa;
-        padding: 0;
-    }
-
-    .navbar-nav {
-        display: flex;
-        flex-grow: 1;
-        justify-content: space-around;
-        margin: 0;
-        padding: 0;
-    }
-
-    .nav-link {
-        flex: 1;
-        text-align: center;
-    }
-
-    .nav-link.active {
-        font-weight: bold;
-        color: #007bff;
-    }
-
-    .nav-link:hover {
-        text-decoration: underline;
-    }
+   
 </style>
 @endsection
 
 @section('content')
-
-<div class="header">
-    <div class="logo">
-        <a href="#">
-            <img src="{{ asset('image/logopancake1.jpg') }}" alt="Logo">
-            <span style="font-size: 24px;">DePoort</span>
-        </a>
-    </div>
-    <div class="client-info">
-        <img src="{{ asset('image/client-photo.jpg') }}" alt="Client Photo">
-        <span>{{ $clientName ?? 'Client Name' }}</span>
-    </div>
-</div>
-
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ url('home') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('Afspraak') }}">Afspraak maken</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('Overons') }}">Over ons</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('Artikelen') }}">Artikelen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('Contact') }}">Contact & Info</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <div class="container mt-4 content">
     <div class="calendars-grid">
@@ -251,7 +130,7 @@
                     <div class="time-label">00:00</div>
                 </div>
                 <div id="calendar6"></div>
-            </div>
+            </div>  
         </div>
         <div>
             <div class="day-label">ZO</div>
@@ -268,11 +147,7 @@
     </div>
 </div>
 
-<footer>
-    <div class="container">
-        <p class="text-center">Copyright © 2024 Jouw Bedrijf</p>
-    </div>
-</footer>
+@endsection
 
 @section('scripts')
 <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js'></script>
@@ -313,6 +188,4 @@
         });
     });
 </script>
-@endsection
-
 @endsection
