@@ -3,6 +3,10 @@
 @section('title', 'Afspraak maken')
 
 @section('content')
+@section('styles')
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+@endsection
+
 
 
 <div class="container mt-5">

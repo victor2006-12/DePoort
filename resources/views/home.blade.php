@@ -2,6 +2,7 @@
 
 @section('styles')
 <link href='css/app.css' rel='stylesheet' />
+<link href="css/style.css" rel="stylesheet" />
 <style>
     .calendars-grid {
         display: grid;
@@ -119,48 +120,7 @@
 </style>
 @endsection
 
-@section('content')
-
-<div class="header">
-    <div class="logo">
-        <a href="#">
-            <img src="{{ asset('image/logopancake1.jpg') }}" alt="Logo">
-            <span style="font-size: 24px;">DePoort</span>
-        </a>
-    </div>
-    <div class="client-info">
-        <img src="{{ asset('image/client-photo.jpg') }}" alt="Client Photo">
-        <span>{{ $clientName ?? 'Client Name' }}</span>
-    </div>
-</div>
-
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ url('home') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('Afspraak') }}">Afspraak maken</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('Overons') }}">Over ons</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('Artikelen') }}">Artikelen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('Contact') }}">Contact & Info</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+@section('content') 
 
 <div class="container mt-4 content">
     <div class="calendars-grid">
@@ -256,7 +216,7 @@
 @endsection
 
 @section('scripts')
-<script src='"https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FAmsterdam&bgcolor=%23ffffff&src=ZXJtaW4uYmVzaWM4QGdtYWlsLmNvbQ&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=bmwuZHV0Y2gjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%2333B679&color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"'></script>
+<script src=<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FAmsterdam&bgcolor=%23ffffff&src=ZXJtaW4uYmVzaWM4QGdtYWlsLmNvbQ&src=bmwuZHV0Y2gjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%230B8043&color=%2333B679" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendar1El = document.getElementById('calendar1');
