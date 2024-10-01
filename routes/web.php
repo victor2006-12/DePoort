@@ -7,6 +7,8 @@ use App\Http\Controllers\ArtikelenController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\AccountController;
+use Illuminate\Support\Facades\Route;
 
 // Post route for submitting appointments
 Route::post('/submit-appointment', [AppointmentController::class, 'store']);
@@ -26,6 +28,11 @@ Route::get('/Overons', [OveronsController::class, 'index']);
 
 // Artikelen page route
 Route::get('/Artikelen', [ArtikelenController::class, 'index']);
+
+Route::get('account/manage', [AccountController::class, 'manage'])->name('account.manage');
+// routes/web.php
+Route::post('account/update', [AccountController::class, 'update'])->name('account.update');
+
 
 // Dashboard page route (requires authentication)
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
