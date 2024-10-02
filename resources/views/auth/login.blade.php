@@ -67,8 +67,8 @@
     </style>
 
     <!-- Login Form -->
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+    <form method="POST" action="{{ action('AuthenticatedSessionController@store') }}">        
+        @csrf <!-- een token VERWIJDER NIET--> 
 
         <div class="header">
             <img src="/img/DePoortLogo.png" alt="" class="logo" width="50" height="50">
@@ -88,9 +88,11 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="custom-input block mt-1" type="password" name="password" required
-                autocomplete="current-password" /> <!-- Added custom-input class -->
+            <x-input-label for="wachtwoord" :value="__('Password')" />
+            <x-text-input id="wachtwoord" class="block mt-1 w-full"
+                            type="password"
+                            name="wachtwoord"
+                            required autocomplete="current-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
@@ -123,13 +125,14 @@
         // Initialize intl-tel-input on the phone input
         const phoneInput = document.querySelector("#phone");
         const iti = intlTelInput(phoneInput, {
-            initialCountry: "nl", // Set default country, e.g., Netherlands (+31)
-            preferredCountries: ["nl", "us", "gb", "de"], // Preferred countries list
+            initialCountry: "nl", // standaar land is Nl
+            preferredCountries: ["nl", "us", "gb", "de"],
             separateDialCode: true, // Show only the country code separately
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js", // Utils script for formatting and validation
         });
 
         // Restrict input to not allow spaces, letters, and limit to 9 digits
+        /*
         phoneInput.addEventListener('input', function () {
             // Remove all spaces and letters from the input
             phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '');
@@ -139,7 +142,7 @@
                 phoneInput.value = phoneInput.value.slice(0, 9);
             }
         });
-
+*/
         // Clear the input when the country code changes
         phoneInput.addEventListener('countrychange', function () {
             // Clear the input to avoid invalid entries when switching countries
