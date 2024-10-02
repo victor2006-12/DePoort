@@ -14,6 +14,7 @@
     <p>Maak hieronder een afspraak door het formulier in te vullen.</p>
     
     <form action="/submit-appointment" method="POST">
+    @csrf
 
     <div class="mb-3">
         <label for="gebruikers_id" class="form-label">Gebruikers ID (voor nu invullen met 1)</label>
