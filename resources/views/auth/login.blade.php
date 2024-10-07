@@ -67,7 +67,7 @@
     </style>
 
     <!-- Login Form -->
-    <form method="POST" action="{{ action('AuthenticatedSessionController@store') }}">        
+    <form method="POST" action="{{ route('login') }}">        
         @csrf <!-- een token VERWIJDER NIET--> 
 
         <div class="header">
