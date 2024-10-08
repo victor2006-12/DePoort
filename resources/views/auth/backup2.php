@@ -1,9 +1,6 @@
 <x-guest-layout>
-    
+    <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
-   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
 
     <style>
         body {
@@ -12,6 +9,7 @@
             display: flex;
             flex-direction: column;
             background-color: #f8f9fa;
+            /* Set your login page background color */
         }
 
         .header {
@@ -20,7 +18,9 @@
             justify-content: center;
             padding: 10px;
             background-color: #f8f9fa;
+            /* Match this to your login page background color */
             margin-bottom: 10px;
+            /* Space between header and line */
         }
 
         .logo {
@@ -31,69 +31,70 @@
             border: 0;
             height: 1px;
             background-color: #e0e0e0;
+            /* Color of the line */
             margin: 10px 0;
+            /* Space around the line */
         }
 
-        .input-group {
+        .content {
+            flex: 1;
             display: flex;
             align-items: center;
-            gap: 5px;
-            width: 100%;
+            justify-content: center;
+            text-align: center;
+            margin-top: 20px;
+            /* Adjust as needed */
         }
 
-        .iti {
-            width: 100%;
+        img {
+            position: relative;
+            /* Adjust as needed */
         }
 
-        .intl-tel-input {
-            width: 100%;
+        input[type="number"] {
+            -moz-appearance: textfield;
+            /* Firefox */
         }
 
-        
-        .custom-input {
-            padding: 10px; 
-            border: 1px solid #ced4da; 
-            border-radius: 0.375rem; 
-            width: 100%; /
-            font-size: 1rem; 
-        }
-
-      
-        .custom-input:focus {
-            border-color: #80bdff; 
-            outline: none; 
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        /* Hide the spinner buttons in Chrome, Safari, and Edge */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
     </style>
 
-  
+    <!-- Login Form -->
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <div class="header">
-            <img src="/img/DePoortLogo.png" alt="" class="logo" width="50" height="50">
+            <img src="/img/DePoortLogo.png" alt="" class="logo" width="50" height="50"> <!-- Replace with your logo -->
             <h2>De Poort</h2>
         </div>
 
-        <hr class="divider">
+        <hr class="divider"> <!-- Line between header and form -->
 
-
+        <!-- Number Input -->
         <div>
-            <x-input-label for="phone" :value="__('Phone Number')" />
-            <div class="input-group">
-                <input type="text" id="phone" class="custom-input block mt-1" required> 
-            </div>
-            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+            <x-input-label for="number" :value="__('Number')" />
+            <x-text-input id="number" class="block mt-1 w-full" type="number" name="number" :value="old('number')"
+                required autofocus autocomplete="off" min="0"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+            <x-input-error :messages="$errors->get('number')" class="mt-2" />
         </div>
 
-        
+
+
+        <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="custom-input block mt-1" type="password" name="password" required
-                autocomplete="current-password" /> 
+            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                autocomplete="current-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
+        <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox"
@@ -115,29 +116,4 @@
             @endif
         </div>
     </form>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
-    <script>
-       
-        const phoneInput = document.querySelector("#phone");
-        const iti = intlTelInput(phoneInput, {
-            initialCountry: "nl", 
-            preferredCountries: ["nl", "us", "gb", "de"], 
-            separateDialCode: true, 
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js", 
-        });
-
-        \
-        phoneInput.addEventListener('input', function () {
-            phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '');
-         
-            if (phoneInput.value.length > 9) {
-                phoneInput.value = phoneInput.value.slice(0, 9);
-            }
-        });
-
-        phoneInput.addEventListener('countrychange', function () {
-            phoneInput.value = '';
-        });
-    </script>
 </x-guest-layout>

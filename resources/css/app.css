@@ -2,3 +2,141 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1; 
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    flex-direction: column;
+}
+
+.calendars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: repeat(2, auto); 
+    grid-gap: 20px; 
+    width: 100%; 
+    max-width: 1200px; 
+}
+
+/* Calendar container */
+.calendar-container {
+    width: 100%; 
+    height: 400px; 
+    border: 1px solid #e0e0e0;
+    border-radius: 8px; 
+    overflow: hidden; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 2px 5px rgba(0, 0, 0, 0.1); 
+    display: flex; /* Flexbox voor uitlijning */
+}
+
+/* Uren container */
+.time-labels {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Verdeelt de uren gelijkmatig */
+    width: 80px; /* Breedte voor de tijdlabels */
+    background-color: #f8f9fa; /* Achtergrondkleur voor tijdlabels */
+    padding: 10px; /* Padding rond de tijdlabels */
+    border-right: 1px solid #e0e0e0; /* Scheidingslijn */
+}
+
+/* Tijdstijlen */
+.time-label {
+    font-size: 16px; /* Grootte van de tijdstijlen */
+    font-family: Arial, sans-serif; /* Arial voor de tijdstijlen */
+}
+
+/* Style voor dag van de week */
+.day-label {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-family: Arial, sans-serif; /* Arial toegevoegd */
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+    height: 120px;
+}
+
+.header img {
+    height: 50px;
+}
+
+.client-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.client-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+
+.client-info span {
+    font-size: 18px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa; /* Dezelfde kleur als de navbar */
+    padding: 0;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+
+/* Knop container */
+.nav-button {
+    padding: 10px 15px; /* Padding rond de knoppen */
+    border-radius: 5px; /* Hoekafgeronde knoppen */
+    background-color: #f8f9fa; /* Achtergrondkleur voor knoppen (zelfde als navbar) */
+    border: 1px solid #ced4da; /* Kleine border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Transitie-effect */
+}
+
+.nav-button:hover {
+    background-color: #e2e6ea; /* Donkerder bij hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Zwaardere box shadow bij hover */
+}
+
+.nav-link {
+    text-decoration: none; /* Geen onderlijning */
+    color: #000; /* Zwarte kleur voor tekst */
+}
+
+.nav-link.active {
+    font-weight: bold;
+    color: #007bff; /* Actieve linkkleur */
+}

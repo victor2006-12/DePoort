@@ -1,88 +1,55 @@
 @extends('layout')
 
-@section('content')
-
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-            <img src="{{ asset('image/logopancake1.jpg') }}" alt="Logo" class="me-2">
-            <span style="font-size: 24px;">DePoort</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Afspraak#">Afspraak maken</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Overons#">Over ons</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Artikelen#">Artikelen</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact#">Contact & Info</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class="container mt-4 card-container">
-    <div class="row">
-
-        <!-- Eerste Card -->
-        <div class="col-md-4">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{{ asset('image/healthcare.jpg') }}" class="img-fluid rounded-start" alt="Healthcare Image">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Wist je dat?</h5>
-                            <p class="card-text">
-                                Het is aangeraden om dagelijks ten minste 30 minuten matige fysieke activiteit te doen, zoals wandelen of fietsen, om hart- en vaatziekten te voorkomen.
-                            </p>
-                            <p class="card-text"><small class="text-body-secondary">Laatste update: 1 uur geleden</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tweede Card -->
-        <div class="col-md-4">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{{ asset('image/healthy-food.jpg') }}" class="img-fluid rounded-start" alt="Healthy Food">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Gezonde voeding</h5>
-   
-                            @section('styles')
+@section('styles')
+<link href='css/app.css' rel='stylesheet' />
+<link href="css/style.css" rel="stylesheet" />
 <style>
-    /* Zorgt ervoor dat de pagina de volledige hoogte heeft en de footer onderaan blijft */
-    html, body {
-        height: 100%;
+    .calendars-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); 
+        grid-template-rows: repeat(2, auto); 
+        grid-gap: 20px; 
+        width: 100%; 
+        max-width: 1200px; 
+    }
+    	
+    /* Calendar container */
+    .calendar-container {
+        width: 100%; 
+        height: 400px; 
+        border: 1px solid #e0e0e0;
+        border-radius: 8px; 
+        overflow: hidden; 
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 2px 5px rgba(0, 0, 0, 0.1); 
+        display: flex; /* Flexbox voor uitlijning */
+    }
+
+    /* Uren container */
+    .time-labels {
         display: flex;
         flex-direction: column;
+        justify-content: space-between; /* Verdeelt de uren gelijkmatig */
+        width: 80px; /* Breedte voor de tijdlabels */
+        background-color: #f8f9fa; /* Achtergrondkleur voor tijdlabels */
+        padding: 10px; /* Padding rond de tijdlabels */
+        border-right: 1px solid #e0e0e0; /* Scheidingslijn */
     }
 
-    /* Zorgt ervoor dat de content de resterende ruimte vult */
-    .content {
-        flex: 1;
+    /* Tijdstijlen */
+    .time-label {
+        font-size: 16px; /* Grootte van de tijdstijlen */
+        font-family: Arial, sans-serif; /* Arial voor de tijdstijlen */
     }
 
-    /* Footer styling */
+    /* Style voor dag van de week */
+    .day-label {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-family: Arial, sans-serif; /* Arial toegevoegd */
+    }
+
     footer {
         background-color: #343a40;
         color: white;
@@ -90,9 +57,201 @@
         width: 100%;
     }
 
-    footer .social-icons a {
-        color: white;
-        margin: 0 10px;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 20px;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e0e0e0;
+        height: 120px;
+    }
+
+    .header img {
+        height: 50px;
+    }
+
+    .client-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .client-info img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-bottom: 5px;
+    }
+
+    .client-info span {
+        font-size: 18px;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f9fa;
+        padding: 0;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-around;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-link {
+        flex: 1;
+        text-align: center;
+    }
+
+    .nav-link.active {
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    .nav-link:hover {
+        text-decoration: underline;
     }
 </style>
+@endsection
+
+@section('content') 
+
+<div class="container mt-4 content">
+    <div class="calendars-grid">
+        <!-- Bovenste rij met 4 kalenders en dagen van de week -->
+        <div>
+            <div class="day-label">MA</div>
+            <div class="calendar-container">
+                <div class="time-labels">
+                    <div class="time-label">06:00</div>
+                    <div class="time-label">12:00</div>
+                    <div class="time-label">18:00</div>
+                    <div class="time-label">00:00</div>
+                </div>
+                <div id="calendar1"></div>
+            </div>
+        </div>
+        <div>
+            <div class="day-label">DI</div>
+            <div class="calendar-container">
+                <div class="time-labels">
+                    <div class="time-label">06:00</div>
+                    <div class="time-label">12:00</div>
+                    <div class="time-label">18:00</div>
+                    <div class="time-label">00:00</div>
+                </div>
+                <div id="calendar2"></div>
+            </div>
+        </div>
+        <div>
+            <div class="day-label">WO</div>
+            <div class="calendar-container">
+                <div class="time-labels">
+                    <div class="time-label">06:00</div>
+                    <div class="time-label">12:00</div>
+                    <div class="time-label">18:00</div>
+                    <div class="time-label">00:00</div>
+                </div>
+                <div id="calendar3"></div>
+            </div>
+        </div>
+        <div>
+            <div class="day-label">DO</div>
+            <div class="calendar-container">
+                <div class="time-labels">
+                    <div class="time-label">06:00</div>
+                    <div class="time-label">12:00</div>
+                    <div class="time-label">18:00</div>
+                    <div class="time-label">00:00</div>
+                </div>
+                <div id="calendar4"></div>
+            </div>
+        </div>
+        <!-- Onderste rij met 3 kalenders -->
+        <div>
+            <div class="day-label">VR</div>
+            <div class="calendar-container">
+                <div class="time-labels">
+                    <div class="time-label">06:00</div>
+                    <div class="time-label">12:00</div>
+                    <div class="time-label">18:00</div>
+                    <div class="time-label">00:00</div>
+                </div>
+                <div id="calendar5"></div>
+            </div>
+        </div>
+        <div>
+            <div class="day-label">ZA</div>
+            <div class="calendar-container">
+                <div class="time-labels">
+                    <div class="time-label">06:00</div>
+                    <div class="time-label">12:00</div>
+                    <div class="time-label">18:00</div>
+                    <div class="time-label">00:00</div>
+                </div>
+                <div id="calendar6"></div>
+            </div>  
+        </div>
+        <div>
+            <div class="day-label">ZO</div>
+            <div class="calendar-container">
+                <div class="time-labels">
+                    <div class="time-label">06:00</div>
+                    <div class="time-label">12:00</div>
+                    <div class="time-label">18:00</div>
+                    <div class="time-label">00:00</div>
+                </div>
+                <div id="calendar7"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+@section('scripts')
+<script src=<iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FAmsterdam&bgcolor=%23ffffff&src=ZXJtaW4uYmVzaWM4QGdtYWlsLmNvbQ&src=bmwuZHV0Y2gjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%230B8043&color=%2333B679" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendar1El = document.getElementById('calendar1');
+        var calendar2El = document.getElementById('calendar2');
+        var calendar3El = document.getElementById('calendar3');
+        var calendar4El = document.getElementById('calendar4');
+        var calendar5El = document.getElementById('calendar5');
+        var calendar6El = document.getElementById('calendar6');
+        var calendar7El = document.getElementById('calendar7');
+
+        // Kalenderinstellingen
+        var calendars = [
+            calendar1El,
+            calendar2El,
+            calendar3El,
+            calendar4El,
+            calendar5El,
+            calendar6El,
+            calendar7El
+        ];
+
+        calendars.forEach((calEl) => {
+            var calendar = new FullCalendar.Calendar(calEl, {
+                initialView: 'timeGrid',
+                allDaySlot: false, // Verberg de hele dag slot
+                slotDuration: '01:00:00', // Uren per slot
+                slotLabelInterval: '01:00', // Interval voor tijdlabels
+                events: [
+                    { title: 'Evenement 1', start: '2024-09-24T10:00:00', end: '2024-09-24T12:00:00' },
+                    { title: 'Evenement 2', start: '2024-09-25T14:00:00', end: '2024-09-25T16:00:00' },
+                    { title: 'Evenement 3', start: '2024-09-28T18:00:00', end: '2024-09-28T20:00:00' }
+                ]
+            });
+            calendar.render();
+        });
+    });
+</script>
 @endsection
