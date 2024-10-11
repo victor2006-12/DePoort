@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('postcode', 6);
             $table->string('woonplaats', 255);
             $table->string('land', 255);
-            $table->string('telefoon', 15);
-            $table->string('wachtwoord', 255);
+            $table->string('email', 255)->unique();
+            $table->string('password', 255);
             $table->boolean('geactiveerd')->default(false);
             $table->timestamps();
         });
