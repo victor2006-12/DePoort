@@ -29,22 +29,40 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // Validatie voor de aangepaste velden in de users-tabel
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'voornaam' => ['required', 'string', 'max:255'],
+            'tussenvoegsel' => ['nullable', 'string', 'max:255'],
+            'achternaam' => ['required', 'string', 'max:255'],
+            'adres' => ['required', 'string', 'max:255'],
+            'postcode' => ['required', 'string', 'size:6'],
+            'woonplaats' => ['required', 'string', 'max:255'],
+            'land' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Maak de gebruiker aan met de aangepaste velden
         $user = User::create([
-            'name' => $request->name,
+            'voornaam' => $request->voornaam,
+            'tussenvoegsel' => $request->tussenvoegsel,
+            'achternaam' => $request->achternaam,
+            'adres' => $request->adres,
+            'postcode' => $request->postcode,
+            'woonplaats' => $request->woonplaats,
+            'land' => $request->land,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'geactiveerd' => false,
         ]);
 
+        // Event afvuren nadat de gebruiker geregistreerd is
         event(new Registered($user));
 
+        // Log de gebruiker automatisch in
         Auth::login($user);
 
+        // Redirect naar het dashboard
         return redirect(route('dashboard', absolute: false));
     }
 }
