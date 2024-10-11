@@ -18,6 +18,7 @@ class AuthenticatedSessionController extends Controller
     {
         return view('auth.login');
     }
+
     /**
      * Handle an incoming authentication request.
      */
@@ -25,16 +26,21 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
         $request->session()->regenerate();
-        return redirect()->intended(route('dashboard', absolute: false));
+
+        // Redirect to the home page instead of the dashboard
+        return redirect()->intended(route('home', absolute: false));
     }
+
     /**
      * Destroy an authenticated session.
      */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect('/');
     }
 }
