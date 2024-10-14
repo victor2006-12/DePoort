@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * Aangepaste primaire sleutel.
@@ -62,15 +63,30 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    /**
+     * Relatie naar de 'Afspraak' model.
+     */
+    public function afspraken()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(Afspraak::class, 'gebruikers_id', 'gebruikers_id');
+    }
+
+    /**
+     * Mutator voor het opslaan van voornaam met een hoofdletter.
+     *
+     * @param string $value
+     */
+    public function setVoornaamAttribute($value)
+    {
+        $this->attributes['voornaam'] = ucfirst($value);
     }
 }

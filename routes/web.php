@@ -8,7 +8,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+
+
 
 // Post route for submitting appointments
 Route::post('/submit-appointment', [AppointmentController::class, 'store']);
