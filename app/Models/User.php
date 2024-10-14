@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,14 +11,44 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
+     * Aangepaste primaire sleutel.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'gebruikers_id';
+
+    /**
+     * Als de primaire sleutel geen auto-increment is.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * Het type van de primaire sleutel.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'gebruikers_id',
+        'foto',
+        'voornaam',
+        'tussenvoegsel',
+        'achternaam',
+        'adres',
+        'postcode',
+        'woonplaats',
+        'land',
         'email',
         'password',
+        'geactiveerd',
     ];
 
     /**

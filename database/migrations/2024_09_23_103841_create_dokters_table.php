@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dokters', function (Blueprint $table) {
             $table->id('dokter_id');
-            $table->binary('foto');
+            $table->binary('foto')->nullable();
             $table->string('voornaam', 255);
             $table->string('tussenvoegsel', 255)->nullable();
             $table->string('achternaam', 255);
