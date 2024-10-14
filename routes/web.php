@@ -10,6 +10,11 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::resource('permissions', [App\Http\Controllers\PermissionController::class]);
+
+
+
 // Post route for submitting appointments
 Route::post('/submit-appointment', [AppointmentController::class, 'store']);
 
