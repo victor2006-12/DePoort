@@ -8,8 +8,17 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AccountController;
+<<<<<<< HEAD
 use App\Http\Controllers\DoktersController;
+=======
+use App\Http\Controllers\AdminController;
+>>>>>>> 8de81ca9fb1c84ffe7ab53baa7c7aedc9eb9e0b3
 use Illuminate\Support\Facades\Route;
+
+Route::resource('permissions', AdminController::class)->middleware('log');
+
+Route::get('/admin', [AdminController::class, 'index'])->name('adminpagina');
+
 
 // Post route for submitting appointments
 Route::post('/submit-appointment', [AppointmentController::class, 'store']);

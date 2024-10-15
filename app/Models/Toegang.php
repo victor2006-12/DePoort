@@ -13,6 +13,7 @@ class Toegang extends Model
         'toegang_id',
         'gebruikers_id',
         'dokter_id',
+        'admin_id',
         'verzoek_toegang',
         'afspraak_toegang',
     ];
