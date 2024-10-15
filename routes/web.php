@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\DoktersController;
 use Illuminate\Support\Facades\Route;
 
 // Post route for submitting appointments
@@ -28,6 +29,11 @@ Route::get('/Overons', [OveronsController::class, 'index']);
 
 // Artikelen page route
 Route::get('/Artikelen', [ArtikelenController::class, 'index']);
+
+
+
+Route::get('/dokter', [DoktersController::class, 'index'])->name('dokter.index');
+
 
 Route::get('account/manage', [AccountController::class, 'manage'])->name('account.manage');
 // routes/web.php
