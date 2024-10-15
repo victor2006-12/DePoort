@@ -16,7 +16,7 @@ class User extends Authenticatable
      *
      * @var string
      */
-    protected $primaryKey = 'gebruikers_id';
+    protected $primaryKey = 'id';
 
     /**
      * Als de primaire sleutel geen auto-increment is.
@@ -41,7 +41,7 @@ class User extends Authenticatable
         'gebruikers_id',
         'foto',
         'voornaam',
-        'tussenvoegsel',
+        'tussenvoegsel', 
         'achternaam',
         'adres',
         'postcode',
@@ -50,7 +50,8 @@ class User extends Authenticatable
         'email',
         'password',
         'geactiveerd',
-    ];
+    ];  
+    
 
     /**
      * The attributes that should be hidden for serialization.

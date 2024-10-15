@@ -11,6 +11,8 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
+Route::resource('permissions', AdminController::class)->middleware('log');
+
 
 
 // Post route for submitting appointments

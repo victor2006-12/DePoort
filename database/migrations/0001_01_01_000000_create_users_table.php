@@ -9,23 +9,24 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id('gebruikers_id');
-            $table->binary('foto')->nullable();
-            $table->string('voornaam', 255);
-            $table->string('tussenvoegsel', 255)->nullable();
-            $table->string('achternaam', 255);
-            $table->string('adres', 255);
-            $table->string('postcode', 6);
-            $table->string('woonplaats', 255);
-            $table->string('land', 255);
-            $table->string('email', 255)->unique();
-            $table->string('password', 255);
-            $table->boolean('geactiveerd')->default(false);
-            $table->timestamps();
-        });
+    public function up()
+{
+    Schema::create('users', function (Blueprint $table) {
+        $table->id();
+        $table->string('gebruikers_id')->unique();
+        $table->string('foto')->nullable();
+        $table->string('voornaam');
+        $table->string('tussenvoegsel')->nullable();
+        $table->string('achternaam');
+        $table->string('adres')->nullable();
+        $table->string('postcode')->nullable();
+        $table->string('woonplaats')->nullable();
+        $table->string('land')->nullable();
+        $table->string('email')->unique();
+        $table->string('password');
+        $table->boolean('geactiveerd')->default(false);
+        $table->timestamps();
+    });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
