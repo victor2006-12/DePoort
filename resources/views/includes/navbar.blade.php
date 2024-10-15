@@ -44,6 +44,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('Contact') }}">Contact & Info</a>
                 </li>
+                    @if(auth()->user() && auth()->user()->hasRole('admin'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('adminpagina') }}">Adminpagina</a>
+                        </li>
+                    @endif
+                
             </ul>
         </div>
     </div>
