@@ -20,11 +20,11 @@ class DatabaseSeeder extends Seeder
        $adminRole = Role::firstOrCreate(['name' => 'admin']);
 
         // Maak de permissies aan
-       $viewDashboardPermission = Permission::firstOrCreate(['name' => 'view dashboard']);
+       $ViewAdminPage = Permission::firstOrCreate(['name' => 'view Admin Page']);
         $manageUsersPermission = Permission::firstOrCreate(['name' => 'manage users']);
 
         // Ken permissies toe aan de rol
-        $adminRole->givePermissionTo($viewDashboardPermission);
+        $adminRole->givePermissionTo($ViewAdminPage);
         $adminRole->givePermissionTo($manageUsersPermission);
 
         // Maak een testgebruiker aan en wijs de rol toe

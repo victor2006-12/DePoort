@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('permissions', AdminController::class)->middleware('log');
 
+Route::get('/admin', [AdminController::class, 'index'])->name('adminpagina');
 
 
 // Post route for submitting appointments
