@@ -7,6 +7,14 @@ use App\Http\Controllers\ArtikelenController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\CalendarController;
+
+Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.index');
+
+
+Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/calendars', [CalendarController::class, 'index']);
 
 // Post route for submitting appointments
 Route::post('/submit-appointment', [AppointmentController::class, 'store']);
@@ -39,3 +47,4 @@ Route::middleware('auth')->group(function () {
 
 // Include authentication routes
 require __DIR__.'/auth.php';
+
