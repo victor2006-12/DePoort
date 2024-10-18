@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(RollenSeeder::class); // Voeg dit toe om de RollenSeeder uit te voeren
+       // $this->call(RollenSeeder::class); // Voeg dit toe om de RollenSeeder uit te voeren
 
         // Maak de rol "admin" als deze nog niet bestaat
        $adminRole = Role::firstOrCreate(['name' => 'admin']);

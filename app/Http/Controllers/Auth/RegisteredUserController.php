@@ -62,7 +62,7 @@ class RegisteredUserController extends Controller
         // Log de gebruiker automatisch in
         Auth::login($user);
 
-        // Redirect naar het dashboard
-        return redirect(route('dashboard', absolute: false));
+        // Redirect terug naar het registratieformulier met een succesbericht
+        return redirect()->route('register')->with('success', 'Registratie succesvol! U bent ingelogd.');
     }
 }

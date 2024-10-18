@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AfspraakController;
 use App\Http\Controllers\ContactController;
@@ -9,12 +10,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminClientController; // Import the new AdminClientController
 use Illuminate\Support\Facades\Route;
 
+// Resource route for permissions
 Route::resource('permissions', AdminController::class)->middleware('log');
 
+// Admin dashboard route
 Route::get('/admin', [AdminController::class, 'index'])->name('adminpagina');
-
 
 // Post route for submitting appointments
 Route::post('/submit-appointment', [AppointmentController::class, 'store']);
@@ -35,21 +38,19 @@ Route::get('/Overons', [OveronsController::class, 'index']);
 // Artikelen page route
 Route::get('/Artikelen', [ArtikelenController::class, 'index']);
 
+// Account management routes
 Route::get('account/manage', [AccountController::class, 'manage'])->name('account.manage');
-// routes/web.php
 Route::post('account/update', [AccountController::class, 'update'])->name('account.update');
-
 
 // Dashboard page route (requires authentication)
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-// Auth middleware group for profile management
-Route::middleware('auth')->group(function () {
+
+    // Auth middleware group for profile management
+    Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
-    
 });
 
 // Include authentication routes

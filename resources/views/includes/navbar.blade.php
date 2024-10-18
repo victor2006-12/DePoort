@@ -48,6 +48,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('adminpagina') }}">Adminpagina</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('register') }}">Create Client Account</a>
                     @endif
                 
             </ul>
