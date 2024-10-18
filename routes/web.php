@@ -40,9 +40,14 @@ Route::post('account/update', [AccountController::class, 'update'])->name('accou
 // Dashboard page route (requires authentication)
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-//dokter page
+//dokter page routes
 Route::get('/dokter', [DokterController::class, 'index']);
 //->middleware(['auth', 'verified'])->name('dokter');
+//Get Dokter details
+Route::get('/dokter/details/{id}', [DokterController::class, 'details']);
+//Get dokter edit page
+Route::get('/dokter/edit/{id}', [DokterController::class, 'edit']);
+
 
 // Auth middleware group for profile management
 Route::middleware('auth')->group(function () {
