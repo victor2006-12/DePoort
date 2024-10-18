@@ -2,29 +2,33 @@
     $activePage = request()->segment(1);
 @endphp
 
+@section('styles')
+<link href='/css/app.css' rel='stylesheet' />
+@endsection
+
 <div class="header d-flex justify-content-between align-items-center py-2">
     <div class="logo">
-        <a href="#">
+        <a href="#" style="font-size: 24px; color:black; text-decoration:none">
             <img src="{{ asset('image/logopancake1.jpg') }}" alt="Logo" class="me-2" style="width: 50px;">
-            <span style="font-size: 24px;">DePoort</span>
+            <span>DePoort</span>
         </a>
     </div>
 
     <!-- Client Info Dropdown -->
     <div class="client-info dropdown">
-        <a href="#" class="d-flex align-items-center" id="clientDropdown" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <img src="{{ asset('image/client-photo.jpg') }}" alt="Client Photo" class="rounded-circle"
-                style="width: 40px; height: 40px;">
-            <span class="ms-2">{{ $clientName ?? 'Client Name' }}</span>
-        </a>
+    <a href="#" class="d-flex align-items-center" id="clientDropdown" data-bs-toggle="dropdown"
+       aria-expanded="false" style="text-decoration: none; color: black;">
+        <img src="{{ asset('image/client-photo.jpg') }}" alt="Client Photo" class="rounded-circle"
+             style="width: 40px; height: 40px;">
+        <span class="ms-2">{{ $clientName ?? 'Client Name' }}</span>
+    </a>
 
-        <!-- Dropdown Menu -->
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="clientDropdown">
-            <li><a class="dropdown-item" href="{{ url('account/manage') }}">Manage Account</a></li>
-            <li><a class="dropdown-item" href="{{ url('logout') }}">Sign Out</a></li>
-        </ul>
-    </div>
+    <!-- Dropdown Menu -->
+    <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="clientDropdown">
+        <li><a class="dropdown-item" href="{{ url('account/manage') }}">Manage Account</a></li>
+        <li><a class="dropdown-item" href="{{ url('logout') }}">Sign Out</a></li>
+    </ul>
+</div>
 </div>
 
 <nav class="navbar navbar-expand-lg">
