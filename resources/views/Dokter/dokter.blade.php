@@ -18,7 +18,7 @@
                 <td>{{ $user->tussenvoegsel }} </td>
             @endif                        
             <td>{{ $user->achternaam }}</td>
-            <td><a href="/dokter/details/{{ $user->gebruikers_id }}">Gegevens</a></td>
+            <td><a href="/dokter/details/{{ $user->id }}">Gegevens</a></td>
         </tr>
         @endforeach
     </table>
