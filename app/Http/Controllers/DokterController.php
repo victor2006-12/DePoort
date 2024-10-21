@@ -29,7 +29,9 @@ class DokterController extends Controller
         
         $userGegevens = DB::select('SELECT * FROM users WHERE id = ?', [$id]);
 
-        return view('dokter.details', compact('userGegevens'));
+        $consultGegevens = DB::select('SELECT * FROM afspraaks WHERE gebruikers_id = ?', [$id]);
+
+        return view('dokter.details', compact('userGegevens'), compact('consultGegevens'));
     }
     
     public function edit($id)
