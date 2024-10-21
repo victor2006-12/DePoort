@@ -2,7 +2,7 @@
     $activePage = request()->segment(1);
 @endphp
 
-@section('styles')
+@section(section: 'styles')
 <link href='/css/app.css' rel='stylesheet' />
 @endsection
 

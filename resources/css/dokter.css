@@ -1,0 +1,43 @@
+.main-container {
+    display: flex;
+    justify-content: flex-start; 
+    padding: 20px;
+}
+
+.clients-container {
+    width: 50%; 
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+.clients-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+.clients-table th, .clients-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.clients-table thead {
+    background-color: black;
+    color: white;
+}
+
+
+.details-link {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.details-link:hover {
+    text-decoration: underline;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

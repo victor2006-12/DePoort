@@ -2,28 +2,36 @@
 
 @section('title', 'Dokter')
 
-@section('content')
+@section('styles')
+    @vite(['resources/css/dokter.css'])
+@endsection
 
-<div>
+@section('content')
+<div class="clients-container">
     <h3>Cliënten</h3>
-    <table>
-        <tr>
-            <th>Voornaam</th>
-            <th>Achternaam</th>
-        </tr>
-        @foreach($getUsers as $user)
-        <tr>
-            <td>{{ $user->voornaam }} </td>
-            @if($user->tussenvoegsel != null)            
-                <td>{{ $user->tussenvoegsel }} </td>
-            @endif                        
-            <td>{{ $user->achternaam }}</td>
-            <td><a href="/dokter/details/{{ $user->id }}">Gegevens</a></td>
-        </tr>
-        @endforeach
+    <table class="clients-table">
+        <thead>
+            <tr>
+                <th>Voornaam</th>
+                <th>Achternaam</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($getUsers as $user)
+            <tr>
+                <td>{{ $user->voornaam }}</td>
+                <td>
+                    @if($user->tussenvoegsel != null)
+                        {{ $user->tussenvoegsel }}
+                    @endif
+                    {{ $user->achternaam }}
+                </td>
+                <td><a href="/dokter/details/{{ $user->id }}" class="details-link">Gegevens</a></td>
+            </tr>
+            @endforeach
+        </tbody>
     </table>
 </div>
-
-
 
 @endsection

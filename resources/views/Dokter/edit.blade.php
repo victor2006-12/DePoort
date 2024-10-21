@@ -6,7 +6,7 @@
 
 <div>
     <h1>Bewerk gegevens van {{ $getUser->voornaam }} {{ $getUser->achternaam }} </h1>
-    <form action="/dokter/update/{{ $getUser->gebruikers_id }}" method="post">
+    <form action="/dokter/update/{{ $getUser->id }}" method="post">
         @csrf
         <label for="voornaam">Voornaam</label>
         <input type="text" name="voornaam" id="voornaam" value="{{ $getUser->voornaam }}" required>

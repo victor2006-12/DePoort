@@ -27,7 +27,7 @@ class DokterController extends Controller
             return redirect('/dokter');
         }
         
-        $userGegevens = DB::select('SELECT * FROM users WHERE gebruikers_id = ?', [$id]);
+        $userGegevens = DB::select('SELECT * FROM users WHERE id = ?', [$id]);
 
         return view('dokter.details', compact('userGegevens'));
     }
