@@ -16,6 +16,6 @@
     <p>{{ $gegevens->postcode }}</p>
     <p>{{ $gegevens->woonplaats }}</p>
     <p>{{ $gegevens->land}}</p>
-    <p><a href="../edit/{{ $gegevens->gebruikers_id }}">bewerk</a></p>
+    <p><a href="../edit/{{ $gegevens->id }}">bewerk</a></p>
 @endforeach
 @endsection
