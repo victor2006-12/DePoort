@@ -1,16 +1,30 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%; /* Zorg ervoor dat de body de volledige hoogte van het scherm heeft */
+}
+
+.navbar {
+    margin-bottom: 40px;
+}
+
 .main-container {
     display: flex;
-    justify-content: flex-start; 
+    justify-content: center; /* Zorgt ervoor dat de inhoud horizontaal gecentreerd is */
     padding: 20px;
+    width: 100%; /* Zorg dat de container de volledige breedte van de pagina neemt */
 }
 
 .clients-container {
-    width: 50%; 
+    width: 50%; /* Zorg dat de container 50% van de breedte neemt */
+    max-width: 800px; /* Voeg een maximum breedte toe voor grotere schermen */
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
+    margin: 0 auto; /* Centreer de container binnen de main-container */
 }
 
 .clients-table {
@@ -30,7 +44,6 @@
     color: white;
 }
 
-
 .details-link {
     color: black;
     text-decoration: none;
@@ -41,3 +54,51 @@
     text-decoration: underline;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
+
+.client-details-container {
+    display: flex;
+    flex-direction: column; /* Zet de inhoud in een kolom */
+    align-items: center; /* Center de inhoud horizontaal */
+     /* Ruimte tussen de tabellen */
+}
+
+.client-details,
+.appointment-details {
+    width: 80%; /* Of een vaste breedte zoals 600px */
+    max-width: 800px; /* Maximaliseer de breedte van de container */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Zorgt voor een nette tabelweergave */
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Scheidingslijn onder elke rij */
+}
+
+th {
+    background-color: black; /* Achtergrondkleur van de header */
+    color: white; /* Kleur van de tekst in de header */
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Hover-effect voor rijen */
+}
+
+a {
+    color: blue;
+    text-decoration: none; /* Geen onderstreping van links */
+}
+
+a:hover {
+    text-decoration: underline; /* Onderstreping bij hover */
+}
+

@@ -6,6 +6,7 @@
     @vite(['resources/css/dokter.css'])
 @endsection
 
+
 @section('content')
 <div class="clients-container">
     <h3>Cliënten</h3>
@@ -33,5 +34,6 @@
         </tbody>
     </table>
 </div>
+
 
 @endsection
