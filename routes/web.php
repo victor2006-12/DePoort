@@ -47,6 +47,8 @@ Route::get('/dokter', [DokterController::class, 'index']);
 Route::get('/dokter/details/{id}', [DokterController::class, 'details']);
 //Get dokter edit page
 Route::get('/dokter/edit/{id}', [DokterController::class, 'edit']);
+//Post dokter edit page
+Route::get('/dokter/editafspraak/{id}', [DokterController::class, 'editafspraak']);
 
 
 // Auth middleware group for profile management

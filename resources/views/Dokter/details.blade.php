@@ -37,7 +37,7 @@
                         <td>{{ $gegevens->postcode }}</td>
                         <td>{{ $gegevens->woonplaats }}</td>
                         <td>{{ $gegevens->land }}</td>
-                        <!-- <td><a href="../edit/{{ $gegevens->id }}">bewerk</a></td> -->
+                        <!-- <td><a href="../edit/{{ $gegevens->id }}">bewerk</a></td> -->                        
                     </tr>
                 @endforeach
             </tbody>
@@ -53,6 +53,7 @@
                     <th>Tijd</th>
                     <th>Onderwerp</th>
                     <th>Consult</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +63,7 @@
                         <td>{{ $afspraak->tijd_afspraak }}</td>
                         <td>{{ $afspraak->onderwerp_afspraak }}</td>
                         <td>{{ $afspraak->consult }}</td>
+                        <td><a href="../editafspraak/{{ $afspraak->afspraak_id }}">bewerk</a></td>
                     </tr>
                 @endforeach
             </tbody>

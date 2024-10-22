@@ -46,4 +46,15 @@ class DokterController extends Controller
 
         return view('dokter.edit', compact('getUser'));
     }
+
+    //get editafspraak
+    public function editafspraak($id)
+    {
+        if($id == null)
+        {
+            return redirect('/dokter');
+        }
+
+        return view('dokter.editafspraak');
+    }
 }
