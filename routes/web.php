@@ -8,16 +8,18 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\DoktersController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DokterController;
 use Illuminate\Support\Facades\Route;
 
 
+
+    // Home page route (including '/home' route)
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');  // Add this route for /home
+
 // Post route for submitting appointments
 Route::post('/submit-appointment', [AppointmentController::class, 'store']);
-
-// Home page route (including '/home' route)
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/home', [HomeController::class, 'index']);  // Add this route for /home
 
 // Afspraak page route
 Route::get('/Afspraak', [AfspraakController::class, 'index']);
@@ -40,19 +42,29 @@ Route::get('account/manage', [AccountController::class, 'manage'])->name('accoun
 // routes/web.php
 Route::post('account/update', [AccountController::class, 'update'])->name('account.update');
 
-
 // Dashboard page route (requires authentication)
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+//dokter page routes
+Route::get('/dokter', [DokterController::class, 'index']);
+//->middleware(['auth', 'verified'])->name('dokter');
+//Get Dokter details
+Route::get('/dokter/details/{id}', [DokterController::class, 'details']);
+//Get dokter edit page voor cliënt
+//moet naar admin
+Route::get('/dokter/edit/{id}', [DokterController::class, 'edit']);
+
+//Get dokter afspraak edit page + POST
+Route::get('/dokter/editafspraak/{id}', [DokterController::class, 'editafspraak']);
+Route::post('/dokter/editafspraak/{id}', [DokterController::class, 'update'])->name('dokter.update');
+
 
 // Auth middleware group for profile management
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
-    
 });
 
 // Include authentication routes
 require __DIR__.'/auth.php';
-
