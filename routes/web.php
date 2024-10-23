@@ -23,8 +23,8 @@ Route::get('/admin', [AdminController::class, 'index'])->name('adminpagina');
 Route::post('/submit-appointment', [AppointmentController::class, 'store']);
 
 // Home page route (including '/home' route)
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/home', [HomeController::class, 'index']);  // Add this route for /home
+Route::get('/', [HomeController::class, 'index']) -> name('home');
+Route::get('/home', [HomeController::class, 'index'])-> name('home');  // Add this route for /home
 
 // Afspraak page route
 Route::get('/Afspraak', [AfspraakController::class, 'index']);
