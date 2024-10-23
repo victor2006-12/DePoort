@@ -15,6 +15,8 @@
 </div>
 @endsection
 
+
+
 @section('content')
 <div class="container mt-4 content">
     <div class="calendar-container">
@@ -32,7 +34,7 @@
 
         var calendarEl = document.getElementById('main-calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-            plugins: [ FullCalendar.GoogleCalendar.default ],
+            plugins: [FullCalendar.GoogleCalendar.default],
             googleCalendarApiKey: 'AIzaSyDbRbI8q91m56Hg9jycf00a3zDKbqQGne4',
             events: {
                 googleCalendarId: 'cd099f93a95fe6e661355943e2f1f1637b8cd9567e23927a004421207f3a4d27@group.calendar.google.com'
