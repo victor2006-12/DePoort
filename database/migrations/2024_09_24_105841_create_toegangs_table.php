@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('toegangs', function (Blueprint $table) {
             $table->id("toegang_id");
-            $table->foreignId("gebruikers_id");
-            $table->foreignId("dokter_id"); 
+            $table->string("gebruikers_id");
+            $table->string("dokter_id");
+            $table->string("admin_id"); 
             $table->boolean("verzoek_toegang")->default(false);
             $table->boolean("afspraak_toegang")->default(false);
             $table->timestamps();

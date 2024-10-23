@@ -15,6 +15,7 @@
         <thead>
             <tr>
                 <th>Voornaam</th>
+                <th>tussenvoegsel</th>
                 <th>Achternaam</th>
                 <th>Details</th>
             </tr>
@@ -27,8 +28,8 @@
                     @if($user->tussenvoegsel != null)
                         {{ $user->tussenvoegsel }}
                     @endif
-                    {{ $user->achternaam }}
-                </td>
+                </td>                
+                <td>{{ $user->achternaam }}</td>
                 <td><a href="/dokter/details/{{ $user->id }}" class="details-link">Gegevens</a></td>
             </tr>
             @endforeach
