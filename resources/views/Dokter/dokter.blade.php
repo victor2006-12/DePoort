@@ -10,6 +10,7 @@
 @section('content')
 <div class="clients-container">
     <h3>Cliënten</h3>
+    <a href="/dokter/meldingen">Meldingen</a>
     <table class="clients-table">
         <thead>
             <tr>

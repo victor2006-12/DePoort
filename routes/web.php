@@ -48,11 +48,11 @@ Route::get('/dokter/details/{id}', [DokterController::class, 'details']);
 //Get dokter edit page voor cliënt
 //moet naar admin
 Route::get('/dokter/edit/{id}', [DokterController::class, 'edit']);
-
 //Get dokter afspraak edit page + POST
 Route::get('/dokter/editafspraak/{id}', [DokterController::class, 'editafspraak']);
 Route::post('/dokter/editafspraak/{id}', [DokterController::class, 'update'])->name('dokter.update');
-
+//Get dokter meldingen
+Route::get('/dokter/meldingen', [DokterController::class, 'meldingen']);
 
 // Auth middleware group for profile management
 Route::middleware('auth')->group(function () {

@@ -72,4 +72,10 @@ class DokterController extends Controller
 
         return redirect('/dokter/details/' . $afspraak->gebruikers_id);
     }
+
+    //get meldingen
+    public function meldingen()
+    {
+        return view('dokter.meldingen');
+    }
 }

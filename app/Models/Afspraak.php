@@ -9,6 +9,7 @@ class Afspraak extends Model
 {
     use HasFactory;
 
+    //zorgt ervoor dat hij afspraak_id gebruikt ipv id als primary key
     protected $table = 'afspraaks';
     protected $primaryKey = 'afspraak_id';
 
