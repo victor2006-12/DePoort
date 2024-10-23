@@ -45,10 +45,13 @@ Route::get('/dokter', [DokterController::class, 'index']);
 //->middleware(['auth', 'verified'])->name('dokter');
 //Get Dokter details
 Route::get('/dokter/details/{id}', [DokterController::class, 'details']);
-//Get dokter edit page
+//Get dokter edit page voor cliënt
+//moet naar admin
 Route::get('/dokter/edit/{id}', [DokterController::class, 'edit']);
-//Post dokter edit page
+
+//Get dokter afspraak edit page + POST
 Route::get('/dokter/editafspraak/{id}', [DokterController::class, 'editafspraak']);
+Route::post('/dokter/editafspraak/{id}', [DokterController::class, 'update'])->name('dokter.update');
 
 
 // Auth middleware group for profile management
