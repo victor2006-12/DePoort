@@ -2,10 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/timegrid/main.css';
+
+
+
 body {
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.navbar a {
+    color: #000; /* zwart */
+}
+
+.navbar a[href="#"] {
+    color: #000; /* zwart */
 }
 
 .content {
@@ -77,6 +91,8 @@ footer {
     background-color: #f8f9fa;
     border-bottom: 1px solid #e0e0e0;
     height: 120px;
+    position:relative;
+    z-index: 1010;
 }
 
 .header img {
@@ -106,6 +122,7 @@ footer {
     align-items: center;
     background-color: #f8f9fa; /* Dezelfde kleur als de navbar */
     padding: 0;
+    z-index: 1;;
 }
 
 .navbar-nav {
@@ -140,3 +157,21 @@ footer {
     font-weight: bold;
     color: #007bff; /* Actieve linkkleur */
 }
+
+.custom-dropdown-menu {
+    position: absolute;
+    top: 100%; /* Zorgt ervoor dat het direct onder het profiel verschijnt */
+    right: 0;
+    z-index: 9999; /* Maak dit hoog genoeg om over de navbar te komen */
+    display: none;
+}
+
+.client-info.dropdown.show .custom-dropdown-menu {
+    display: block;
+}
+
+.navbar, .header {
+    z-index: 1; /* Zorg dat deze lager is dan de dropdown */
+}
+
+

@@ -10,13 +10,13 @@
             </div>
             <!-- Social Media Links -->
             <div class="col-md-6 text-md-end">
-                <a href="#" class="text-white me-3">
+                <a href="https://www.facebook.com" class="text-white me-3">
                     <i class="bi bi-facebook"></i> Facebook
                 </a>
-                <a href="#" class="text-white me-3">
+                <a href="https://www.twitter.com" class="text-white me-3">
                     <i class="bi bi-twitter"></i> Twitter
                 </a>
-                <a href="#" class="text-white">
+                <a href="https://www.instagram.com" class="text-white">
                     <i class="bi bi-instagram"></i> Instagram
                 </a>
             </div>
