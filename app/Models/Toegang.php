@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Toegang extends Model
 {
-    use HasFactory;
+    use HasFactory;    
 
     protected $fillable = [
         'toegang_id',

@@ -81,9 +81,13 @@ class DokterController extends Controller
 
         $meldingen = Toegang::where('dokter_id', $id)->where('verzoek_toegang', true)->get();
         
-        $toegangId = $meldingen->toegang_id;
+        if($meldingen->isNotEmpty())
+        {
+            $toegangId = $meldingen->first()->toegang_id;
+            
+            $verzoekVanAdmin = $meldingen->where('toegang_id', $toegangId)->get('admin_id');        
+        }
 
-        $verzoekVanAdmin = $meldingen->where('toegangs_id', $toegangId)->get('admin_id');        
 
         return view('dokter.meldingen',compact('meldingen'));
     }
