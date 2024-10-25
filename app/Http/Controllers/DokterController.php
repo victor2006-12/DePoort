@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Afspraak;
+use App\Models\Toegang;
 
 class DokterController extends Controller
 {
@@ -62,7 +63,7 @@ class DokterController extends Controller
             'consult' => 'required|string|max:255',
         ]);
 
-        $afspraak = Afspraak::find($id);
+        $afspraak = Afspraak::findOrFail($id);
 
         $afspraak->datum_afspraak = $request->input('datum_afspraak');
         $afspraak->tijd_afspraak = $request->input('tijd_afspraak');
@@ -76,6 +77,14 @@ class DokterController extends Controller
     //get meldingen
     public function meldingen()
     {
-        return view('dokter.meldingen');
+        $id = Auth::id();
+
+        $meldingen = Toegang::where('dokter_id', $id)->where('verzoek_toegang', true)->get();
+        
+        $toegangId = $meldingen->toegang_id;
+
+        $verzoekVanAdmin = $meldingen->where('toegangs_id', $toegangId)->get('admin_id');        
+
+        return view('dokter.meldingen',compact('meldingen'));
     }
 }
