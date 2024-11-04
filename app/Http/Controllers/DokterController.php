@@ -74,7 +74,7 @@ class DokterController extends Controller
         return redirect('/dokter/details/' . $afspraak->gebruikers_id);
     }
 
-    //get meldingen
+    //GET meldingen
     public function meldingen()
     {
         $id = Auth::id();
@@ -85,10 +85,25 @@ class DokterController extends Controller
         {
             $toegangId = $meldingen->first()->toegang_id;
             
-            $verzoekVanAdmin = $meldingen->where('toegang_id', $toegangId)->get('admin_id');        
+            $adminId = DB::table('toegangs')->where('toegang_id', $toegangId)->first()->admin_id;
+            $verzoekVanAdmin = DB::table('users')->where('id', $adminId)->get();
+            
+            $clientId = DB::table('toegangs')->where('toegang_id', $toegangId)->first()->gebruikers_id;
+            $clientVerzoek = DB::table('users')->where('id', $clientId)->get();
+
+            $toegangGegevens = Toegang::where('dokter_id', $id)
+            ->where('verzoek_toegang', true)
+            ->get()
+            ->map(function ($melding) //loopt door de meldingen heen
+            {
+                $melding->admin = DB::table('users')->where('id', $melding->admin_id)->first(); //haalt de admin gegevens op
+                $melding->client = DB::table('users')->where('id', $melding->gebruikers_id)->first(); //haalt de client gegevens op
+                return $melding; //geef de melding terug
+            });
         }
 
 
-        return view('dokter.meldingen',compact('meldingen'));
+        return view('dokter.meldingen',compact('meldingen', 'toegangGegevens'));
     }
+    
 }
