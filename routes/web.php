@@ -51,8 +51,10 @@ Route::get('/dokter/edit/{id}', [DokterController::class, 'edit']);
 //Get dokter afspraak edit page + POST
 Route::get('/dokter/editafspraak/{id}', [DokterController::class, 'editafspraak']);
 Route::post('/dokter/editafspraak/{id}', [DokterController::class, 'update'])->name('dokter.update');
-//Get dokter meldingen
-Route::get('/dokter/meldingen', [DokterController::class, 'meldingen']);
+//dokter meldingen
+Route::get('/dokter/meldingen', [DokterController::class, 'meldingen'])->name('dokter.meldingen');
+Route::post('/dokter/medling-toestaan/{toegang_id}', [DokterController::class, 'medlingToestaan'])->name('dokter.medlingToestaan');
+Route::post('/dokter/medling-weigeren/{toegang_id}', [DokterController::class, 'meldingWeigeren'])->name('dokter.meldingWeigeren');
 
 // Auth middleware group for profile management
 Route::middleware('auth')->group(function () {

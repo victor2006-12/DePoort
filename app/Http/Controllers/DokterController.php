@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Afspraak;
 use App\Models\Toegang;
 
@@ -14,7 +15,7 @@ class DokterController extends Controller
     //GET index
     public function index()
     {                
-        $getUsers = DB::select('SELECT * FROM users');
+        $getUsers = User::all();
         //dokter.dokter want view zit in een submap
         return view('dokter.dokter', compact('getUsers')); 
     }
@@ -100,10 +101,40 @@ class DokterController extends Controller
                 $melding->client = DB::table('users')->where('id', $melding->gebruikers_id)->first(); //haalt de client gegevens op
                 return $melding; //geef de melding terug
             });
-        }
-
-
-        return view('dokter.meldingen',compact('meldingen', 'toegangGegevens'));
+            return view('dokter.meldingen',compact('meldingen', 'toegangGegevens'));
+        }     
+        return view('dokter.meldingen', compact('meldingen'));
     }
     
+    //POST medlingToestaan
+    public function medlingToestaan($toegang_id)
+    {   
+        $toegang = Toegang::findOrFail($toegang_id);
+
+        $toegang->update([
+            'afspraak_toegang' => true,
+            'verzoek_toegang'  => false,
+        ]);
+
+        $id = Auth::id();
+        $meldingen = Toegang::where('dokter_id', $id)->where('verzoek_toegang', true)->get();
+
+        return view('dokter.meldingen', compact('meldingen'));
+    }
+
+    //POST meldingWeigeren
+    public function meldingWeigeren($toegang_id)
+    {
+        $toegang = Toegang::findOrFail($toegang_id);
+
+        $toegang->update([
+            'afspraak_toegang' => false,
+            'verzoek_toegang'  => false,
+        ]); 
+
+        $id = Auth::id();
+        $meldingen = Toegang::where('dokter_id', $id)->where('verzoek_toegang', true)->get();
+
+        return view('dokter.meldingen', compact('meldingen'));
+    }
 }
