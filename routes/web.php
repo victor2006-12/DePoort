@@ -4,6 +4,8 @@ use App\Http\Controllers\AfspraakController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OveronsController;
 use App\Http\Controllers\ArtikelenController;
+
+
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AppointmentController;
@@ -35,7 +37,7 @@ Route::get('/Artikelen', [ArtikelenController::class, 'index']);
 
 
 
-Route::get('/dokter', [DoktersController::class, 'index'])->name('dokter.index');
+
 
 
 Route::get('account/manage', [AccountController::class, 'manage'])->name('account.manage');
