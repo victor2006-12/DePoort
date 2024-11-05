@@ -1,19 +1,37 @@
-body, html {
+html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     height: 100%;
-}
-
-.navbar {
-    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
 }
 
 .main-container {
+    flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     padding: 20px;
-    width: 100%; 
+    width: 100%;
+}
+
+.footer {
+    position: relative;
+    margin-top: auto; 
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+
+.navbar {
+    margin-bottom: 40px;
 }
 
 .clients-container {
@@ -95,3 +113,77 @@ a:hover {
     text-decoration: underline; 
 }
 
+.button-allow {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button-deny {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.melding-div {
+    margin-top: 20px;  
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #F5F5F5;
+}
+
+.melding-div-buttons {
+     margin-top: 20px;  
+    text-align: center;
+    padding: 10px;
+
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.melding-div .voornaam {
+    color: blue; 
+}
+
+.melding-div .tussenvoegsel {
+    color: blue; 
+}
+
+.melding-div .achternaam {
+    color: blue;
+}
+
+
+.melding-div .voornaam-admin {
+    color: red; 
+}
+
+.melding-div .tussenvoegsel-admin {
+    color: red; 
+}
+
+.melding-div .achternaam-admin {
+    color: red; 
+}
