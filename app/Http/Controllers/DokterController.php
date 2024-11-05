@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Afspraak;
 use App\Models\Toegang;
 
@@ -14,7 +15,7 @@ class DokterController extends Controller
     //GET index
     public function index()
     {                
-        $getUsers = DB::select('SELECT * FROM users');
+        $getUsers = User::all();
         //dokter.dokter want view zit in een submap
         return view('dokter.dokter', compact('getUsers')); 
     }
@@ -74,17 +75,66 @@ class DokterController extends Controller
         return redirect('/dokter/details/' . $afspraak->gebruikers_id);
     }
 
-    //get meldingen
+    //GET meldingen
     public function meldingen()
     {
         $id = Auth::id();
 
         $meldingen = Toegang::where('dokter_id', $id)->where('verzoek_toegang', true)->get();
         
-        $toegangId = $meldingen->toegang_id;
+        if($meldingen->isNotEmpty())
+        {
+            $toegangId = $meldingen->first()->toegang_id;
+            
+            $adminId = DB::table('toegangs')->where('toegang_id', $toegangId)->first()->admin_id;
+            $verzoekVanAdmin = DB::table('users')->where('id', $adminId)->get();
+            
+            $clientId = DB::table('toegangs')->where('toegang_id', $toegangId)->first()->gebruikers_id;
+            $clientVerzoek = DB::table('users')->where('id', $clientId)->get();
 
-        $verzoekVanAdmin = $meldingen->where('toegangs_id', $toegangId)->get('admin_id');        
+            $toegangGegevens = Toegang::where('dokter_id', $id)
+            ->where('verzoek_toegang', true)
+            ->get()
+            ->map(function ($melding) //loopt door de meldingen heen
+            {
+                $melding->admin = DB::table('users')->where('id', $melding->admin_id)->first(); //haalt de admin gegevens op
+                $melding->client = DB::table('users')->where('id', $melding->gebruikers_id)->first(); //haalt de client gegevens op
+                return $melding; //geef de melding terug
+            });
+            return view('dokter.meldingen',compact('meldingen', 'toegangGegevens'));
+        }     
+        return view('dokter.meldingen', compact('meldingen'));
+    }
+    
+    //POST medlingToestaan
+    public function medlingToestaan($toegang_id)
+    {   
+        $toegang = Toegang::findOrFail($toegang_id);
 
-        return view('dokter.meldingen',compact('meldingen'));
+        $toegang->update([
+            'afspraak_toegang' => true,
+            'verzoek_toegang'  => false,
+        ]);
+
+        $id = Auth::id();
+        $meldingen = Toegang::where('dokter_id', $id)->where('verzoek_toegang', true)->get();
+
+        return view('dokter.meldingen', compact('meldingen'));
+    }
+
+    //POST meldingWeigeren
+    public function meldingWeigeren($toegang_id)
+    {
+        $toegang = Toegang::findOrFail($toegang_id);
+
+        $toegang->update([
+            'afspraak_toegang' => false,
+            'verzoek_toegang'  => false,
+        ]); 
+
+        $id = Auth::id();
+        $meldingen = Toegang::where('dokter_id', $id)->where('verzoek_toegang', true)->get();
+
+        return view('dokter.meldingen', compact('meldingen'));
     }
 }
