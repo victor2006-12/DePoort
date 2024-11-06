@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -14,7 +15,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('AdminPagina');
+        if(Auth::user() == null) {
+            return redirect('/login');
+        }
+        
+        $getUserId = Auth::user()->id;
+        $userName = User::find($getUserId)->voornaam;
+
+        return view('AdminPagina', compact('userName'));
     }
 
     /**

@@ -16,19 +16,19 @@
 
     <!-- Client Info Dropdown -->
     <div class="client-info dropdown">
-    <a href="#" class="d-flex align-items-center" id="clientDropdown" data-bs-toggle="dropdown"
-       aria-expanded="false" style="text-decoration: none; color: black;">
-        <img src="{{ asset('image/client-photo.jpg') }}" alt="Client Photo" class="rounded-circle"
-             style="width: 40px; height: 40px;">
-        <span class="ms-2">{{ $clientName ?? 'Client Name' }}</span>
-    </a>
+        <a href="#" class="d-flex align-items-center" id="clientDropdown" data-bs-toggle="dropdown"
+            aria-expanded="false" style="text-decoration: none; color: black;">
+            <img src="{{ asset('image/client-photo.jpg') }}" alt="Client Photo" class="rounded-circle"
+                style="width: 40px; height: 40px;">
+            <span class="ms-2">{{ $userName ?? 'nahh' }}</span>
+        </a>
 
-    <!-- Dropdown Menu -->
-    <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="clientDropdown">
-        <li><a class="dropdown-item" href="{{ url('account/manage') }}">Manage Account</a></li>
-        <li><a class="dropdown-item" href="{{ url('logout') }}">Sign Out</a></li>
-    </ul>
-</div>
+        <!-- Dropdown Menu -->
+        <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="clientDropdown">
+            <li><a class="dropdown-item" href="{{ url('account/manage') }}">Manage Account</a></li>
+            <li><a class="dropdown-item" href="{{ url('logout') }}">Sign Out</a></li>
+        </ul>
+    </div>
 </div>
 
 <nav class="navbar navbar-expand-lg">

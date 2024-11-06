@@ -16,7 +16,6 @@
 @endsection
 
 
-
 @section('content')
 <div class="container mt-4 content">
     <div class="calendar-container">
