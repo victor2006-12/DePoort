@@ -1,4 +1,9 @@
 <x-guest-layout>
+    @if(session("success"))
+        <div class="alert alert-success">
+            {{ session("success") }}
+        </div>
+    @endif
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -51,7 +56,7 @@
             <x-input-error :messages="$errors->get('land')" class="mt-2" />
         </div>
 
-       <!-- Email Address -->
+        <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
@@ -83,4 +88,3 @@
         </div>
     </form>
 </x-guest-layout>
-
