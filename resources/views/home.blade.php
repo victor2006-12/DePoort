@@ -7,11 +7,11 @@
 
 @section('navbar')
 <div class="navbar">
-    <div class="navbar-nav">
+    < class="navbar-nav">
         <a href="#" class="nav-link active">Home</a>
         <a href="#" class="nav-link">Kalender</a>
         <a href="#" class="nav-link">Contact</a>
-    </div>
+</div>
 </div>
 @endsection
 
@@ -30,7 +30,7 @@
 <script src='files/index.global.js'></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var events = @json($events); 
+        var events = @json($events);
 
         var calendarEl = document.getElementById('main-calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -39,12 +39,12 @@
             events: {
                 googleCalendarId: 'cd099f93a95fe6e661355943e2f1f1637b8cd9567e23927a004421207f3a4d27@group.calendar.google.com'
             },
-            className: 'gcal-event', 
+            className: 'gcal-event',
             initialView: 'timeGridWeek',
             allDaySlot: false,
             slotDuration: '01:00:00',
             slotLabelInterval: '01:00',
-            locale: 'nl', 
+            locale: 'nl',
             eventClick: function (info) {
                 alert('Afspraak: ' + info.event.title + '\nStart: ' + info.event.start + '\nEindigt: ' + info.event.end);
             }
