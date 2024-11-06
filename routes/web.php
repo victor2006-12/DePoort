@@ -36,15 +36,30 @@ Route::get('/Overons', [OveronsController::class, 'index']);
 // Artikelen page
 Route::get('/Artikelen', [ArtikelenController::class, 'index']);
 
-// Submit Appointment (POST)
-Route::post('/submit-appointment', [AppointmentController::class, 'store']);
+Route::get('account/manage', [AccountController::class, 'manage'])->name('account.manage');
+// routes/web.php
+Route::post('account/update', [AccountController::class, 'update'])->name('account.update');
 
-/*
-|--------------------------------------------------------------------------
-| Authenticated Routes
-|--------------------------------------------------------------------------
-*/
+// Dashboard page route (requires authentication)
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
+//dokter page routes
+Route::get('/dokter', [DokterController::class, 'index']);
+//->middleware(['auth', 'verified'])->name('dokter');
+//Get Dokter details
+Route::get('/dokter/details/{id}', [DokterController::class, 'details']);
+//Get dokter edit page voor cliënt
+//moet naar admin
+Route::get('/dokter/edit/{id}', [DokterController::class, 'edit']);
+//Get dokter afspraak edit page + POST
+Route::get('/dokter/editafspraak/{id}', [DokterController::class, 'editafspraak']);
+Route::post('/dokter/editafspraak/{id}', [DokterController::class, 'update'])->name('dokter.update');
+//dokter meldingen
+Route::get('/dokter/meldingen', [DokterController::class, 'meldingen'])->name('dokter.meldingen');
+Route::post('/dokter/medling-toestaan/{toegang_id}', [DokterController::class, 'medlingToestaan'])->name('dokter.medlingToestaan');
+Route::post('/dokter/medling-weigeren/{toegang_id}', [DokterController::class, 'meldingWeigeren'])->name('dokter.meldingWeigeren');
+
+// Auth middleware group for profile management
 Route::middleware('auth')->group(function () {
     // Dashboard (requires authentication and email verification)
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['verified'])->name('dashboard');
