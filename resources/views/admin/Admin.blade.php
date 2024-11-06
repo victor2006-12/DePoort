@@ -1,74 +1,98 @@
-@extends('layout')
-
-@section('title', 'Contact & Info')
-@section('styles')
-@vite(['resources/css/admin.css'])
-@endsection
+<!-- In resources/views/admin/admin.blade.php -->
+@extends('layouts.app')
 
 @section('content')
-<div class="container mt-4">
-    <h2>Update Client Information</h2>
-    <form action="" method="POST">
-        @csrf
-        @method('PUT')
+<div class="container">
+    <h1>Admin Dashboard</h1>
 
-        <!-- First Name -->
-        <div class="mb-3">
-            <label for="first_name" class="form-label">Voornaam</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') }}" required>
-        </div>
+    <!-- Admin Users Table -->
+    <h2>Admins</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($admins as $admin)
+                <tr>
+                    <td>{{ $admin->id }}</td>
+                    <td>{{ $admin->name }}</td>
+                    <td>{{ $admin->email }}</td>
+                    <td>
+                        <a href="{{ route('admin.edit', $admin->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this admin?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
-        <!-- Middle Name -->
-        <div class="mb-3">
-            <label for="middle_name" class="form-label">Tussenvoegsel</label>
-            <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ old('middle_name') }}">
-        </div>
+    <!-- Doctor Users Table -->
+    <h2>Doctors</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($doctors as $doctor)
+                <tr>
+                    <td>{{ $doctor->id }}</td>
+                    <td>{{ $doctor->name }}</td>
+                    <td>{{ $doctor->email }}</td>
+                    <td>
+                      <!--  <a href="{{ route('admin.doctors.edit', $doctor->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('admin.doctors.destroy', $doctor->id) }}" method="POST" style="display:inline;">-->
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this doctor?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
-        <!-- Last Name -->
-        <div class="mb-3">
-            <label for="last_name" class="form-label">Achternaam</label>
-            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') }}" required>
-        </div>
-
-        <!-- Address -->
-        <div class="mb-3">
-            <label for="address" class="form-label">Adres</label>
-            <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" required>
-        </div>
-
-        <!-- Postal Code -->
-        <div class="mb-3">
-            <label for="postal_code" class="form-label">Postcode</label>
-            <input type="text" class="form-control" id="postal_code" name="postal_code" value="{{ old('postal_code') }}" required>
-        </div>
-
-        <!-- City -->
-        <div class="mb-3">
-            <label for="city" class="form-label">Woonplaats</label>
-            <input type="text" class="form-control" id="city" name="city" value="{{ old('city') }}" required>
-        </div>
-
-        <!-- Country -->
-        <div class="mb-3">
-            <label for="country" class="form-label">Land</label>
-            <input type="text" class="form-control" id="country" name="country" value="{{ old('country') }}" required>
-        </div>
-
-        <!-- Email -->
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
-        </div>
-
-        <!-- Password -->
-        <div class="mb-3">
-            <label for="password" class="form-label">Wachtwoord</label>
-            <input type="password" class="form-control" id="password" name="password">
-            <small class="text-muted">Laat leeg als je het wachtwoord niet wilt wijzigen.</small>
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Opslaan</button>
-    </form>
-</div>      
+    <!-- Client Users Table -->
+    <h2>Clients</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($clients as $client)
+                <tr>
+                    <td>{{ $client->id }}</td>
+                    <td>{{ $client->name }}</td>
+                    <td>{{ $client->email }}</td>
+                    <td>
+                       <!-- <a href="{{ route('admin.clients.edit', $client->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('admin.clients.destroy', $client->id) }}" method="POST" style="display:inline;">-->
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this client?');">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 @endsection

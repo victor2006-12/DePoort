@@ -59,6 +59,7 @@
                         href="{{ url('Contact') }}">Contact & info</a>
                 </li>
                     @if(auth()->user() && auth()->user()->hasRole('admin'))
+                    {{ dd(auth()->user()) }} <!-- Add this line for debugging -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('adminpagina') }}">Adminpagina</a>
                         </li>
