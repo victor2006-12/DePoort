@@ -19,7 +19,7 @@
         @csrf
 
         <div class="mb-3">
-            <label for="gebruikers_id" class="form-label">Gebruikers ID (voor nu invullen met 1)</label>
+            <label for="gebruikers_id" class="form-label">ID (voor nu invullen met 1)</label>
             <input type="number" class="form-control" id="gebruikers_id" name="gebruikers_id" value="1" required>
         </div>
         <div class="mb-3">
