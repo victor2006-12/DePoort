@@ -16,6 +16,7 @@ class DokterController extends Controller
     public function index()
     {
         $getUsers = User::all();
+    
         //dokter.dokter want view zit in een submap
 
         if(Auth::user() == null) {

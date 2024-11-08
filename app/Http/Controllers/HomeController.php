@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         // Assuming you're fetching events from a database or an API
-        $events = []; // Replace with your actual logic to get events
+        $events = []; // Replace with your actual logic to get events        
 
         if(Auth::user() == null) {
             return redirect('/login');

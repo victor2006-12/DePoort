@@ -58,12 +58,15 @@
                     <a class="nav-link {{ $activePage == 'Contact' ? 'active' : '' }}"
                         href="{{ url('Contact') }}">Contact & info</a>
                 </li>
-                @if(auth()->user() && auth()->user()->hasRole('admin'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('adminpagina') }}">Adminpagina</a>
-                    </li>
-                @endif
-
+                    @if(auth()->user() && auth()->user()->hasRole('admin'))
+                    {{ dd(auth()->user()) }} <!-- Add this line for debugging -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('adminpagina') }}">Adminpagina</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('register') }}">Create Client Account</a>
+                    @endif
+                
             </ul>
         </div>
     </div>
