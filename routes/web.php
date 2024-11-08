@@ -80,20 +80,21 @@ Route::middleware('auth')->group(function () {
 | Admin Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin', [AdminController::class, 'index'])->name('adminpagina');
+Route::get('/admin/edit/{id}', [AdminEditController::class, 'edit'])->name('admin.edit');
+Route::patch('/admin/edit/{id}', [AdminEditController::class, 'update'])->name('admin.update');
+Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Admin Dashboard
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin', [AdminController::class, 'index'])->name('adminpagina');
 
     // Permissions Management
     Route::resource('permissions', AdminController::class)->middleware('log');
 
     // Additional admin routes (e.g., clients management could go here)
     //Route::resource('admin/clients', AdminClientController::class)->names('admin.clients');
-    Route::get('/admin/edit/{id}', [AdminEditController::class, 'edit'])->name('admin.edit');
-    Route::patch('/admin/edit/{id}', [AdminEditController::class, 'update'])->name('admin.update');
-    Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+   
 
     //Route::patch('/admin/clients/{id}', [AdminEditController::class, 'update'])->name('admin.clients.update');
 
