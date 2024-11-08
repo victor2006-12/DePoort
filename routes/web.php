@@ -12,6 +12,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminClientController;
+use App\Http\Controllers\DokterController;
 use Illuminate\Support\Facades\Route;
 
 /*
