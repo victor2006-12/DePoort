@@ -86,6 +86,9 @@ Route::get('/admin/edit/{id}', [AdminEditController::class, 'edit'])->name('admi
 Route::patch('/admin/edit/{id}', [AdminEditController::class, 'update'])->name('admin.update');
 Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
+Route::get('/admin/meldingen', [AdminController::class, 'meldingen'])->name('admin.meldingen');
+Route::post('/admin/medling/aanvragen', [AdminController::class, 'medlingAanvragen'])->name('admin.medlingAanvragen');
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Admin Dashboard
 
