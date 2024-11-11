@@ -23,5 +23,14 @@
         </div>
     @endforeach
 </div>
+<div>
+    @foreach($getUsers as $toegang)
+        <a href="{{ route('admin.toegangGebruikers')}}">
+            {{$toegang->voornaam}}
+            {{$toegang->tussenvoegsel}}
+            {{$toegang->achternaam}}
+        </a>
+    @endforeach
+</div>
 
 @endsection

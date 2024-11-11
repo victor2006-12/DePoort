@@ -53,7 +53,13 @@ class AdminController extends Controller
         //nu ff dit toch
         $getDokters = User::get();
 
-        return view('admin.meldingen', compact('getUser', 'getDokters'));
+        $getToegestaandeMeldingen = Toegang::where('afspraak_toegang', true)->get();
+        $userId = Toegang::where('afspraak_toegang', true)->pluck('gebruikers_id');
+
+        $getUsers = User::whereIn('id', $userId)->get();
+        
+
+        return view('admin.meldingen', compact('getUser', 'getDokters', 'getUsers'));
     }   
 
     //POST meldingen 
@@ -72,5 +78,12 @@ class AdminController extends Controller
         $toegang->save();
 
         return redirect()->route('admin.meldingen')->with('success', 'Toegang vragen gestuurd!');
+    }
+
+    //GET meldingInzien
+    public function meldingInzien()
+    {
+        //$toegang = Toegang::findOrFail($toegang_id);
+        return view('admin.toegangGebruikers');
     }
 }

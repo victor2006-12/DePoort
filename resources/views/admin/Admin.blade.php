@@ -95,7 +95,7 @@
         </tbody>
     </table>
     <div>
-        <a href="/admin/meldingen" class="btn btn-primary">EWA</a>
+        <a href="/admin/meldingen" class="btn btn-primary">Toegang</a>
     </div>
 </div>
 @endsection
