@@ -5,6 +5,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\Toegang;
+use App\Models\Afspraak;
 
 class AdminController extends Controller
 {
@@ -54,8 +55,7 @@ class AdminController extends Controller
         $getDokters = User::get();
 
         $getToegestaandeMeldingen = Toegang::where('afspraak_toegang', true)->get();
-        $userId = Toegang::where('afspraak_toegang', true)->pluck('gebruikers_id');
-
+        $userId = Toegang::where('afspraak_toegang', true)->pluck('gebruikers_id'); 
         $getUsers = User::whereIn('id', $userId)->get();
         
 
@@ -83,7 +83,11 @@ class AdminController extends Controller
     //GET meldingInzien
     public function meldingInzien()
     {
-        //$toegang = Toegang::findOrFail($toegang_id);
-        return view('admin.toegangGebruikers');
+        $userId = Toegang::where('afspraak_toegang', true)->pluck('gebruikers_id');
+        $getUsers = User::whereIn('id', $userId)->get();
+
+        $getAfspraken = Afspraak::whereIn('gebruikers_id', $userId)->get();
+
+        return view('admin.toegangGebruikers', compact('getUsers', 'getAfspraken'));
     }
 }
