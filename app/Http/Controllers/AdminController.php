@@ -80,7 +80,7 @@ class AdminController extends Controller
         return redirect()->route('admin.meldingen')->with('success', 'Toegang vragen gestuurd!');
     }
 
-    //GET meldingInzien
+    //GET meldingInzien       (toeganggebruikers)
     public function meldingInzien()
     {
         $userId = Toegang::where('afspraak_toegang', true)->pluck('gebruikers_id');
@@ -89,5 +89,80 @@ class AdminController extends Controller
         $getAfspraken = Afspraak::whereIn('gebruikers_id', $userId)->get();
 
         return view('admin.toegangGebruikers', compact('getUsers', 'getAfspraken'));
+    }
+
+    //GET edituser
+    public function edituser($id)
+    {
+        $user = User::findOrFail($id);
+        $afspraken = Afspraak::where('gebruikers_id', $id)->get();
+        
+        return view('admin.edituser', compact('user', 'afspraken'));
+    }
+
+    //POST updateuser
+    public function updateuser(Request $request, $id)
+    {
+        $request->validate([
+            'voornaam' => 'required|string|max:255',
+            'tussenvoegsel' => 'nullable|string|max:255',
+            'achternaam' => 'required|string|max:255',
+            'adres' => 'required|string|max:255',
+            'postcode' => 'required|string|max:255',
+            'woonplaats' => 'required|string|max:255',
+            'land' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
+
+        $user = User::findOrFail($id);
+        
+        $user->voornaam = $request->input('voornaam');
+        $user->tussenvoegsel = $request->input('tussenvoegsel');
+        $user->achternaam = $request->input('achternaam');
+        $user->adres = $request->input('adres');
+        $user->postcode = $request->input('postcode');
+        $user->woonplaats = $request->input('woonplaats');
+        $user->land = $request->input('land');
+        $user->email = $request->input('email');
+
+        $user->save();
+
+        return redirect()->route('admin.toegangGebruikers');
+    }
+
+    //GET editAfspraak
+    public function editAfspraak($id)
+    {
+        $userId = Toegang::where('afspraak_toegang', true)->pluck('gebruikers_id');
+
+        $getAfspraken = Afspraak::whereIn('gebruikers_id', $userId)->get();
+        
+        return view('admin.editAfspraak', compact('getAfspraken'));
+    }
+
+    //POST updateAfspraak
+    public function updateAfspraak(Request $request, $id)
+    {
+        $request->validate([
+            'gebruikers_id' => 'required|integer',
+            'dokter_id' => 'required|integer',
+            'datum_afspraak' => 'required|date',
+            'tijd_afspraak' => 'required|date_format:H:i:s',
+            'onderwerp_afspraak' => 'required|string|max:255',
+            'consult' => 'required|string|max:255',
+        ]);
+
+        $afspraak = Afspraak::FindOrFail($id);
+        
+        $afspraak->gebruikers_id = $request->input('gebruikers_id');
+        $afspraak->dokter_id = $request->input('dokter_id');
+        $afspraak->datum_afspraak = $request->input('datum_afspraak');
+        $afspraak->tijd_afspraak = $request->input('tijd_afspraak');
+        $afspraak->onderwerp_afspraak = $request->input('onderwerp_afspraak');
+        $afspraak->consult = $request->input('consult');
+
+        $afspraak->save();
+
+        return redirect()->route('admin.toegangGebruikers');
     }
 }
