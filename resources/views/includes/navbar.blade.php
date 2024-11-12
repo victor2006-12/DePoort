@@ -16,12 +16,12 @@
 
     <!-- Client Info Dropdown -->
     <div class="client-info dropdown">
-        <a href="#" class="d-flex align-items-center" id="clientDropdown" data-bs-toggle="dropdown"
-            aria-expanded="false" style="text-decoration: none; color: black;">
-            <img src="{{ asset('image/client-photo.jpg') }}" alt="Client Photo" class="rounded-circle"
-                style="width: 40px; height: 40px;">
-            <span class="ms-2">{{ $userName ?? 'niks' }}</span>
-        </a>
+    <a href="#" class="d-flex align-items-center" id="clientDropdown" data-bs-toggle="dropdown"
+       aria-expanded="false" style="text-decoration: none; color: black;">
+        <img src="{{ asset('image/client-photo.jpg') }}" alt="Client Photo" class="rounded-circle"
+             style="width: 40px; height: 40px;">
+        <span class="ms-2">{{ $userName ?? 'Client Name' }}</span>
+    </a>
 
         <!-- Dropdown Menu -->
         <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="clientDropdown">

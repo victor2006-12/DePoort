@@ -35,12 +35,12 @@ class AdminEditController extends Controller
         $user = User::findOrFail($id);
 
         $request->validate([
-            'name' => 'required|string|max:255',
+            'voornaam' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'role' => 'required|string', // if roles are predefined
         ]);
 
-        $user->update($request->only(['name', 'email', 'role']));
+        $user->update($request->only(['voornaam', 'email', 'role']));
 
         return redirect()->route('admin.admin')->with('success', 'Admin updated successfully.');
     }

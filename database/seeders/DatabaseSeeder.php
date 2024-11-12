@@ -29,10 +29,9 @@ class DatabaseSeeder extends Seeder
 
         // Maak een testgebruiker aan en wijs de rol toe
         $user = User::factory()->create([
-            'gebruikers_id' => '1', // Zorg voor een unieke gebruikers ID
-            'voornaam' => 'Admin',
+            'voornaam' => 'Jan',
             'achternaam' => 'User', 
-            'email' => 'admin@example.com',
+            'email' => 'admin2@example.com',
             'password' => bcrypt('password123'), // Stel een standaard wachtwoord in
         ]); 
         
