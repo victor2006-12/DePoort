@@ -95,8 +95,9 @@ class AdminController extends Controller
     public function edituser($id)
     {
         $user = User::findOrFail($id);
+        $afspraken = Afspraak::where('gebruikers_id', $id)->get();
         
-        return view('admin.edituser', compact('user'));
+        return view('admin.edituser', compact('user', 'afspraken'));
     }
 
     //POST updateuser
@@ -104,7 +105,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'voornaam' => 'required|string|max:255',
-            'tussenvoegsel' => 'required|string|max:255',
+            'tussenvoegsel' => 'nullable|string|max:255',
             'achternaam' => 'required|string|max:255',
             'adres' => 'required|string|max:255',
             'postcode' => 'required|string|max:255',
@@ -125,6 +126,42 @@ class AdminController extends Controller
         $user->email = $request->input('email');
 
         $user->save();
+
+        return redirect()->route('admin.toegangGebruikers');
+    }
+
+    //GET editAfspraak
+    public function editAfspraak($id)
+    {
+        $userId = Toegang::where('afspraak_toegang', true)->pluck('gebruikers_id');
+
+        $getAfspraken = Afspraak::whereIn('gebruikers_id', $userId)->get();
+        
+        return view('admin.editAfspraak', compact('getAfspraken'));
+    }
+
+    //POST updateAfspraak
+    public function updateAfspraak(Request $request, $id)
+    {
+        $request->validate([
+            'gebruikers_id' => 'required|integer',
+            'dokter_id' => 'required|integer',
+            'datum_afspraak' => 'required|date',
+            'tijd_afspraak' => 'required|date_format:H:i:s',
+            'onderwerp_afspraak' => 'required|string|max:255',
+            'consult' => 'required|string|max:255',
+        ]);
+
+        $afspraak = Afspraak::FindOrFail($id);
+        
+        $afspraak->gebruikers_id = $request->input('gebruikers_id');
+        $afspraak->dokter_id = $request->input('dokter_id');
+        $afspraak->datum_afspraak = $request->input('datum_afspraak');
+        $afspraak->tijd_afspraak = $request->input('tijd_afspraak');
+        $afspraak->onderwerp_afspraak = $request->input('onderwerp_afspraak');
+        $afspraak->consult = $request->input('consult');
+
+        $afspraak->save();
 
         return redirect()->route('admin.toegangGebruikers');
     }
