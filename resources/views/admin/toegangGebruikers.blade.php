@@ -16,6 +16,9 @@
                 {{$toegang->postcode}}
                 {{$toegang->woonplaats}}
                 {{$toegang->land}}           
+                <a href="{{ route('admin.GETedituser', $toegang->id) }}">
+                    Bewerken gegevens en afsrpaken
+                </a>
             </p>
         @endforeach
     </p>
@@ -27,9 +30,6 @@
                 {{$afspraak->datum_afspraak}}
                 {{$afspraak->tijd_afspraak}}
                 {{$afspraak->consult}}
-                <a href="{{ route('admin.GETedituser', ['id' => $afspraak->gebruikers_id]) }}">
-                    Bewerken gegevens
-                </a>
             </p>
         @endforeach
     </p>

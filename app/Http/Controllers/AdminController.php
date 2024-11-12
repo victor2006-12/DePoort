@@ -80,7 +80,7 @@ class AdminController extends Controller
         return redirect()->route('admin.meldingen')->with('success', 'Toegang vragen gestuurd!');
     }
 
-    //GET meldingInzien
+    //GET meldingInzien       (toeganggebruikers)
     public function meldingInzien()
     {
         $userId = Toegang::where('afspraak_toegang', true)->pluck('gebruikers_id');
