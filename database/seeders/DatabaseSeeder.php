@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
 
         // Maak een testgebruiker aan en wijs de rol toe
         $user = User::factory()->create([
+            
             'voornaam' => 'Admin',
             'achternaam' => 'User', 
             'email' => 'admin@example.com',
