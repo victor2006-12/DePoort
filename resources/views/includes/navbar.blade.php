@@ -20,7 +20,7 @@
             aria-expanded="false" style="text-decoration: none; color: black;">
             <img src="{{ asset('image/client-photo.jpg') }}" alt="Client Photo" class="rounded-circle"
                 style="width: 40px; height: 40px;">
-            <span class="ms-2">{{ $userName ?? 'nahh' }}</span>
+            <span class="ms-2">{{ $userName ?? 'niks' }}</span>
         </a>
 
         <!-- Dropdown Menu -->
