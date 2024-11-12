@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             
             'voornaam' => 'Admin',
             'achternaam' => 'User', 
-            'email' => 'admin@example.com',
+            'email' => 'admin2@example.com',
             'password' => bcrypt('password123'), // Stel een standaard wachtwoord in
         ]); 
         

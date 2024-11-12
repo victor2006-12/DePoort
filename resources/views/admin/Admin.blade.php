@@ -94,5 +94,8 @@
             @endforeach
         </tbody>
     </table>
+    <div>
+        <a href="/admin/meldingen" class="btn btn-primary">EWA</a>
+    </div>
 </div>
 @endsection

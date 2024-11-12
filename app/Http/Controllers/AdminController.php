@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+use App\Models\Toegang;
 
 class AdminController extends Controller
 {
@@ -38,5 +39,38 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
         return redirect()->route('admin.index')->with('success', 'User deleted successfully.');
+    }
+
+
+    //GET meldingen
+    public function meldingen()
+    {
+        $getUser = User::get();
+
+        //gebruik dit later als dokter rol goed is ingesteld
+        //$getDokters = User::role('dokter')->get();
+
+        //nu ff dit toch
+        $getDokters = User::get();
+
+        return view('admin.meldingen', compact('getUser', 'getDokters'));
+    }   
+
+    //POST meldingen 
+    //Create toegang
+    public function medlingAanvragen(Request $request)
+    {
+        $user = User::findOrFail($request->gebruikers_id);
+        
+        //maakt niewe melding voor dokter
+        $toegang = new toegang(); 
+        $toegang->gebruikers_id = $request->gebruikers_id;
+        $toegang->admin_id = $request->admin_id;
+        $toegang->dokter_id = $request->dokter;
+        $toegang->verzoek_toegang = true;
+        $toegang->afspraak_toegang = false;
+        $toegang->save();
+
+        return redirect()->route('admin.meldingen')->with('success', 'Toegang vragen gestuurd!');
     }
 }
