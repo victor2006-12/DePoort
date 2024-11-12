@@ -90,4 +90,42 @@ class AdminController extends Controller
 
         return view('admin.toegangGebruikers', compact('getUsers', 'getAfspraken'));
     }
+
+    //GET edituser
+    public function edituser($id)
+    {
+        $user = User::findOrFail($id);
+        
+        return view('admin.edituser', compact('user'));
+    }
+
+    //POST updateuser
+    public function updateuser(Request $request, $id)
+    {
+        $request->validate([
+            'voornaam' => 'required|string|max:255',
+            'tussenvoegsel' => 'required|string|max:255',
+            'achternaam' => 'required|string|max:255',
+            'adres' => 'required|string|max:255',
+            'postcode' => 'required|string|max:255',
+            'woonplaats' => 'required|string|max:255',
+            'land' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
+
+        $user = User::findOrFail($id);
+        
+        $user->voornaam = $request->input('voornaam');
+        $user->tussenvoegsel = $request->input('tussenvoegsel');
+        $user->achternaam = $request->input('achternaam');
+        $user->adres = $request->input('adres');
+        $user->postcode = $request->input('postcode');
+        $user->woonplaats = $request->input('woonplaats');
+        $user->land = $request->input('land');
+        $user->email = $request->input('email');
+
+        $user->save();
+
+        return redirect()->route('admin.toegangGebruikers');
+    }
 }

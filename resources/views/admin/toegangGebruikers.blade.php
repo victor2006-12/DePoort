@@ -26,6 +26,9 @@
                 {{$afspraak->datum_afspraak}}
                 {{$afspraak->tijd_afspraak}}
                 {{$afspraak->consult}}
+                <a href="{{ route('admin.edituser', ['id' => $afspraak->gebruikers_id]) }}">
+                    Bewerken
+                </a>
             </p>
         @endforeach
     </p>
