@@ -1,5 +1,5 @@
 <!-- In resources/views/admin/admin.blade.php -->
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
 <div class="container">
@@ -96,6 +96,7 @@
     </table>
     <div>
         <a href="/admin/meldingen" class="btn btn-primary">Toegang</a>
+        <a href="/admin/gebruikeraanmaken" class="btn btn-primary">Gebruiker aanmaken</a>
     </div>
 </div>
 @endsection

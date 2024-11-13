@@ -95,6 +95,10 @@ Route::get('/admin/edituser/{id}',  [AdminController::class, 'edituser'  ])->nam
 Route::post('/admin/edituser/{id}', [AdminController::class, 'updateuser'])->name('admin.updateuser');
 Route::post('/admin/editAfspraak/{id}', [AdminController::class, 'updateAfspraak'])->name('admin.updateAfspraak');  
 
+//GET gebruikeraanmaken
+Route::get('/admin/gebruikeraanmaken', [AdminController::class, 'gebruikeraanmaken'])->name('admin.gebruikeraanmaken');
+Route::post('/admin/gebruikeraanmaken', [AdminController::class, 'gebruikeraanmakenPOST'])->name('admin.gebruikeraanmakenPOST');
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Admin Dashboard
 
