@@ -1,5 +1,4 @@
 @extends('layout')
-
 @section('content')
 
 <div class="container">
@@ -21,6 +20,18 @@
                 <button type="submit">Toegang vragen</button>
             </form>
         </div>
+    @endforeach
+</div>
+<div>
+    <h3>Gebruikers met toegang</h3>
+    @foreach($getUsers as $toegang)
+        <p>
+        <a href="{{ route('admin.toegangGebruikers', $toegang->id)}}">
+            {{$toegang->voornaam}}
+            {{$toegang->tussenvoegsel}}
+            {{$toegang->achternaam}}
+        </a>
+        </p>
     @endforeach
 </div>
 

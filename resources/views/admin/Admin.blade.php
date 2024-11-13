@@ -63,7 +63,8 @@
         </tbody>
     </table>
     <div>
-        <a href="/admin/meldingen" class="btn btn-primary">EWA</a>
+        <a href="/admin/meldingen" class="btn btn-primary">Toegang</a>
+        <a href="/admin/gebruikeraanmaken" class="btn btn-primary">Gebruiker aanmaken</a>
     </div>
 </div>
 @endsection
