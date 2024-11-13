@@ -26,7 +26,7 @@
 <div>
     <h3>Gebruikers met toegang</h3>
     @foreach($getUsers as $toegang)
-        <a href="{{ route('admin.toegangGebruikers')}}">
+        <a href="{{ route('admin.toegangGebruikers', $toegang->id)}}">
             {{$toegang->voornaam}}
             {{$toegang->tussenvoegsel}}
             {{$toegang->achternaam}}
