@@ -165,4 +165,10 @@ class AdminController extends Controller
 
         return redirect()->route('admin.toegangGebruikers');
     }
+
+    //GET create user
+    public function gebruikeraanmaken()
+    {
+        return view('admin.gebruikeraanmaken');
+    }
 }
