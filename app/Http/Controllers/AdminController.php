@@ -38,7 +38,12 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('admin.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('admin.admin')->with('success', 'User deleted successfully.');
+    }
+    public function showAdmins()
+    {
+        $admins = User::role('admin')->get(); // Get users with the 'admin' role
+        dd($admins); // Dump the result to see it
     }
 
 
