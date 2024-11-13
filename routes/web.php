@@ -97,6 +97,7 @@ Route::post('/admin/editAfspraak/{id}', [AdminController::class, 'updateAfspraak
 
 //GET gebruikeraanmaken
 Route::get('/admin/gebruikeraanmaken', [AdminController::class, 'gebruikeraanmaken'])->name('admin.gebruikeraanmaken');
+Route::post('/admin/gebruikeraanmaken', [AdminController::class, 'gebruikeraanmakenPOST'])->name('admin.gebruikeraanmakenPOST');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Admin Dashboard

@@ -6,6 +6,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\Toegang;
 use App\Models\Afspraak;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -88,7 +89,7 @@ class AdminController extends Controller
 
         $getAfspraken = Afspraak::whereIn('gebruikers_id', $userId)->get();
 
-        return view('admin.toegangGebruikers', compact('getUsers', 'getAfspraken'));
+        return view('admin.toegangGebruikers', ['id' => $id], compact('getUsers', 'getAfspraken'));
     }
 
     //GET edituser
@@ -127,7 +128,7 @@ class AdminController extends Controller
 
         $user->save();
 
-        return redirect()->route('admin.toegangGebruikers');
+        return redirect()->route('admin.toegangGebruikers', ['id' => $id]);
     }
 
     //GET editAfspraak
@@ -163,12 +164,41 @@ class AdminController extends Controller
 
         $afspraak->save();
 
-        return redirect()->route('admin.toegangGebruikers');
+        return redirect()->route('admin.toegangGebruikers', ['id' => $id]);
     }
 
     //GET create user
     public function gebruikeraanmaken()
     {
         return view('admin.gebruikeraanmaken');
+    }
+
+    //POST create user
+    public function gebruikeraanmakenPOST(Request $request)
+    {
+        $request->validate([
+            'voornaam' => 'required|string|max:255',
+            'tussenvoegsel' => 'nullable|string|max:255',
+            'achternaam' => 'required|string|max:255',
+            'adres' => 'required|string|max:255',
+            'postcode' => 'required|string|max:255',
+            'woonplaats' => 'required|string|max:255',
+            'land' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]); 
+
+        $user = User::create([
+            'voornaam' => $request->input('voornaam'),
+            'tussenvoegsel' => $request->input('tussenvoegsel'),
+            'achternaam' => $request->input('achternaam'),
+            'adres' => $request->input('adres'),
+            'postcode' => $request->input('postcode'),
+            'woonplaats' => $request->input('woonplaats'),
+            'land' => $request->input('land'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ]);
+
+        return redirect()->route('adminpagina');
     }
 }
