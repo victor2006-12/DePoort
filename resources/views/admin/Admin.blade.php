@@ -97,6 +97,8 @@
     <div>
         <a href="/admin/meldingen" class="btn btn-primary">Toegang</a>
         <a href="/admin/gebruikeraanmaken" class="btn btn-primary">Gebruiker aanmaken</a>
+        <a href="/admin/activeren" class="btn btn-primary">Gebruiker activeren</a>
+        <a href="/admin/Deactiveren" class="btn btn-primary">Gebruiker deactiveren</a>
     </div>
 </div>
 @endsection
