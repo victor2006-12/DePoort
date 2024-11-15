@@ -201,4 +201,40 @@ class AdminController extends Controller
 
         return redirect()->route('adminpagina');
     }
+
+    //GET admin/Activeren
+    public function activeren()
+    {
+        $users = User::where('geactiveerd', false)->get();
+
+        return view('admin.activeren', compact('users'));
+    }
+
+    //POST admin/Activeren
+    public function activerenPOST(Request $request, $id)
+    {
+        $user = User::FindOrFail($id);
+        $user->geactiveerd = true;
+        $user->save();
+
+        return redirect()->route('admin.activeren');
+    }
+
+    //GET admin/Deactiveren
+    public function deactiveren()
+    {
+        $users = User::where('geactiveerd', true)->get();
+
+        return view('admin.deactiveren', compact('users'));
+    }
+
+    //POST admin/Deactiveren
+    public function deactiverenPOST(Request $request, $id)
+    {
+        $user = User::FindOrFail($id);
+        $user->geactiveerd = false;
+        $user->save();
+
+        return redirect()->route('admin.deactiveren');
+    }
 }
