@@ -27,7 +27,10 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         //check of het account is geactiveerd
-        
+        $user = User::where('email', $request->email)->first();
+        if (!$user->geactiveerd) {
+            return back()->withErrors(['email' => 'Uw account is nog niet geactiveerd.']);
+        }
 
 
         $request->authenticate();
