@@ -104,6 +104,11 @@ Route::post('/admin/editAfspraak/{id}', [AdminController::class, 'updateAfspraak
 Route::get('/admin/gebruikeraanmaken', [AdminController::class, 'gebruikeraanmaken'])->name('admin.gebruikeraanmaken');
 Route::post('/admin/gebruikeraanmaken', [AdminController::class, 'gebruikeraanmakenPOST'])->name('admin.gebruikeraanmakenPOST');
 
+Route::get('/admin/activeren', [AdminController::class, 'activeren'])->name('admin.activeren');
+Route::post('/admin/activeren/{id}', [AdminController::class, 'activerenPOST'])->name('admin.activerenPOST');
+Route::get('admin/Deactiveren', [AdminController::class, 'deactiveren'])->name('admin.deactiveren');
+Route::post('/admin/deactiveren/{id}', [AdminController::class, 'deactiverenPOST'])->name('admin.deactiverenPOST');
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Admin Dashboard
 
