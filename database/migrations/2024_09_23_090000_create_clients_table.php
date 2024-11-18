@@ -4,15 +4,17 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateClientsTable extends Migration // Naming convention: pluralize the table name
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->id('gebruikers_id');
+            $table->id('id');
             $table->binary('foto')->nullable();
             $table->string('voornaam', 255);
             $table->string('tussenvoegsel', 255)->nullable();
@@ -30,9 +32,11 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('clients'); // Drops the clients table if it exists
     }
-};
+}

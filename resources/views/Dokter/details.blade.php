@@ -45,29 +45,33 @@
     </div>
     
     <div class="appointment-details">
-        <h2>Afspraak Gegevens</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Datum</th>  
-                    <th>Tijd</th>
-                    <th>Onderwerp</th>
-                    <th>Consult</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($consultGegevens as $afspraak)
+        @if(!$consultGegevens == null)
+            <h2>Afspraak Gegevens</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ $afspraak->datum_afspraak }}</td>
-                        <td>{{ $afspraak->tijd_afspraak }}</td>
-                        <td>{{ $afspraak->onderwerp_afspraak }}</td>
-                        <td>{{ $afspraak->consult }}</td>
-                        <td><a href="../editafspraak/{{ $afspraak->afspraak_id }}">bewerk</a></td>
+                        <th>Datum</th>  
+                        <th>Tijd</th>
+                        <th>Onderwerp</th>
+                        <th>Consult</th>
+                        <th></th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($consultGegevens as $afspraak)
+                        <tr>
+                            <td>{{ $afspraak->datum_afspraak }}</td>
+                            <td>{{ $afspraak->tijd_afspraak }}</td>
+                            <td>{{ $afspraak->onderwerp_afspraak }}</td>
+                            <td>{{ $afspraak->consult }}</td>
+                            <td><a href="../editafspraak/{{ $afspraak->afspraak_id }}">bewerk</a></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            Geen afspraken
+        @endif            
     </div>
 </div>
 

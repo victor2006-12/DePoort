@@ -1,110 +1,76 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
+use App\Models\Toegang;
 
 class AdminController extends Controller
 {
     /**
-     * Display the admin dashboard.
+     * Display the admin dashboard with a list of users by role.
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        return view('AdminPagina');
+        $admins = User::role('admin')->get();
+        $doctors = User::role('dokter')->get();
+        $clients = User::role('client')->get();
+
+        return view('admin.admin', compact('admins', 'doctors', 'clients'));
+    }
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.edit', compact('user'));
     }
 
-    /**
-     * Display a listing of users.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function users()
+    public function update(Request $request, $id)
     {
-        $users = User::all();
-        return view('admin.users.index', compact('users'));
+        $user = User::findOrFail($id);
+        $user->update($request->only(['name', 'email'])); // Include any other fields you want to allow updating
+        return redirect()->route('admin.admin')->with('success', 'User updated successfully.');
     }
 
-    /**
-     * Show the form for creating a new user.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function createUser()
+    public function destroy($id)
     {
-        return view('admin.users.create');
-    }
-
-    /**
-     * Store a newly created user in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function storeUser(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8',
-        ]);
-
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
-        ]);
-
-        return redirect()->route('admin.users.index')->with('success', 'User created successfully.');
-    }
-
-    /**
-     * Show the form for editing the specified user.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\View\View
-     */
-    public function editUser(User $user)
-    {
-        return view('admin.users.edit', compact('user'));
-    }
-
-    /**
-     * Update the specified user in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function updateUser(Request $request, User $user)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8',
-        ]);
-
-        $user->update([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => $validated['password'] ? bcrypt($validated['password']) : $user->password,
-        ]);
-
-        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
-    }
-
-    /**
-     * Remove the specified user from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroyUser(User $user)
-    {
+        $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('admin.index')->with('success', 'User deleted successfully.');
+    }
+
+
+    //GET meldingen
+    public function meldingen()
+    {
+        $getUser = User::get();
+
+        //gebruik dit later als dokter rol goed is ingesteld
+        //$getDokters = User::role('dokter')->get();
+
+        //nu ff dit toch
+        $getDokters = User::get();
+
+        return view('admin.meldingen', compact('getUser', 'getDokters'));
+    }   
+
+    //POST meldingen 
+    //Create toegang
+    public function medlingAanvragen(Request $request)
+    {
+        $user = User::findOrFail($request->gebruikers_id);
+        
+        //maakt niewe melding voor dokter
+        $toegang = new toegang(); 
+        $toegang->gebruikers_id = $request->gebruikers_id;
+        $toegang->admin_id = $request->admin_id;
+        $toegang->dokter_id = $request->dokter;
+        $toegang->verzoek_toegang = true;
+        $toegang->afspraak_toegang = false;
+        $toegang->save();
+
+        return redirect()->route('admin.meldingen')->with('success', 'Toegang vragen gestuurd!');
     }
 }

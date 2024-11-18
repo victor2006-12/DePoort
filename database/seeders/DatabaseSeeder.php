@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(RollenSeeder::class); // Voeg dit toe om de RollenSeeder uit te voeren
+      // $this->call(RollenSeeder::class); // Voeg dit toe om de RollenSeeder uit te voeren
 
         // Maak de rol "admin" als deze nog niet bestaat
        $adminRole = Role::firstOrCreate(['name' => 'admin']);
@@ -29,10 +29,9 @@ class DatabaseSeeder extends Seeder
 
         // Maak een testgebruiker aan en wijs de rol toe
         $user = User::factory()->create([
-            'gebruikers_id' => '1', // Zorg voor een unieke gebruikers ID
-            'voornaam' => 'Admin',
-            'achternaam' => 'User',
-            'email' => 'admin@example.com',
+            'voornaam' => 'Jan',
+            'achternaam' => 'User', 
+            'email' => 'admin2@example.com',
             'password' => bcrypt('password123'), // Stel een standaard wachtwoord in
         ]); 
         

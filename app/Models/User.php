@@ -7,9 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
+    protected $guard_name = 'web'; // or whatever guard you want to use
 
     /**
      * Aangepaste primaire sleutel.
@@ -51,6 +53,11 @@ class User extends Authenticatable
         'password',
         'geactiveerd',
     ];  
+    public function hasRole($role)
+    {
+        return $this->role === $role; // Adjust according to how you manage roles
+    }
+
     
 
     /**
