@@ -14,28 +14,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-      // $this->call(RollenSeeder::class); // Voeg dit toe om de RollenSeeder uit te voeren
+        // Create the "admin" role if it doesn't exist
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
 
-        // Maak de rol "admin" als deze nog niet bestaat
-       $adminRole = Role::firstOrCreate(['name' => 'admin']);
+        // // Create permissions for admin
+        $viewAdminPage = Permission::firstOrCreate(['name' => 'view admin page']);
+         $manageUsersPermission = Permission::firstOrCreate(['name' => 'manage users']);
 
-        // Maak de permissies aan
-       $ViewAdminPage = Permission::firstOrCreate(['name' => 'view Admin Page']);
-        $manageUsersPermission = Permission::firstOrCreate(['name' => 'manage users']);
+        // // Assign permissions to the admin role
+         $adminRole->givePermissionTo([$viewAdminPage, $manageUsersPermission]);
 
-        // Ken permissies toe aan de rol
-        $adminRole->givePermissionTo($ViewAdminPage);
-        $adminRole->givePermissionTo($manageUsersPermission);
-
-        // Maak een testgebruiker aan en wijs de rol toe
-        $user = User::factory()->create([
-            'voornaam' => 'Jan',
-            'achternaam' => 'User', 
+        // Create a test user with the "admin" role
+        $adminUser = User::factory()->create([
+            'voornaam' => 'Admin',
+            'achternaam' => 'User',
             'email' => 'admin2@example.com',
-            'password' => bcrypt('password123'), // Stel een standaard wachtwoord in
-        ]); 
-        
-        
+            'password' => bcrypt('password123'), // Default password
+        ]);
+        $adminUser->assignRole($adminRole);
+
+        // Create the "doctor" role if it doesn't exist
+
     }
-    
 }

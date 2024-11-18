@@ -13,6 +13,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminClientController;
 use App\Http\Controllers\DokterController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,17 +23,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Home page (also accessible via /home)
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index']);
 
-// Afspraak page
-Route::get('/Afspraak', [AfspraakController::class, 'index']);
+    // Afspraak page
+    Route::get('/Afspraak', [AfspraakController::class, 'index']);
 
-// Contact page
-Route::get('/Contact', [ContactController::class, 'index']);
+    // Contact page
+    Route::get('/Contact', [ContactController::class, 'index']);
 
-// Overons page
-Route::get('/Overons', [OveronsController::class, 'index']);
+    // Overons page
+    Route::get('/Overons', [OveronsController::class, 'index']);
 
 // Artikelen page
 Route::get('/Artikelen', [ArtikelenController::class, 'index']);
@@ -45,7 +46,7 @@ Route::post('account/update', [AccountController::class, 'update'])->name('accou
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 //dokter page routes
-Route::get('/dokter', [DokterController::class, 'index']);
+Route::get('/dokter', [DokterController::class, 'index']) ->name('dokterpagina');
 //->middleware(['auth', 'verified'])->name('dokter');
 //Get Dokter details
 Route::get('/dokter/details/{id}', [DokterController::class, 'details']);
@@ -80,14 +81,18 @@ Route::middleware('auth')->group(function () {
 | Admin Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-Route::get('/admin', [AdminController::class, 'index'])->name('adminpagina');
-Route::get('/admin/edit/{id}', [AdminEditController::class, 'edit'])->name('admin.edit');
-Route::patch('/admin/edit/{id}', [AdminEditController::class, 'update'])->name('admin.update');
-Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    // Admin Dashboard
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin', [AdminController::class, 'index'])->name('adminpagina');
+    Route::get('/admin/edit/{id}', [AdminEditController::class, 'edit'])->name('admin.edit');
+    Route::patch('/admin/edit/{id}', [AdminEditController::class, 'update'])->name('admin.update');
+    Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
-Route::get('/admin/meldingen', [AdminController::class, 'meldingen'])->name('admin.meldingen');
-Route::post('/admin/medling/aanvragen', [AdminController::class, 'medlingAanvragen'])->name('admin.medlingAanvragen');
+    // Admin Notifications and other actions
+    Route::get('/admin/meldingen', [AdminController::class, 'meldingen'])->name('admin.meldingen');
+    Route::post('/admin/medling/aanvragen', [AdminController::class, 'medlingAanvragen'])->name('admin.medlingAanvragen');
+});
 
 Route::get('/admin/toegangGebruikers/{id}', [AdminController::class, 'meldingInzien'])->name('admin.toegangGebruikers');
 
@@ -124,4 +129,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 |--------------------------------------------------------------------------
 */
 
+
 require __DIR__.'/auth.php';
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+
 class AdminEditController extends Controller
 {
     // Show form to edit a specific admin
@@ -13,35 +14,35 @@ class AdminEditController extends Controller
         $user = User::findOrFail($id);
         return view('admin.edit', compact('user'));
     }
-    public function destroy($id)
-{
-    $user = User::findOrFail($id);
-    $user->delete();
 
-    return redirect()->route('admin.admin')->with('success', 'Admin deleted successfully.');
-}
-
-
-/*************  ✨ Codeium Command ⭐  *************/
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-/******  211f54dc-771b-4df0-8ec8-aaad2bec8298  *******/    // Update an admin's information
+    // Update an admin's information
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
 
+        // Validate incoming request
         $request->validate([
             'voornaam' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'role' => 'required|string', // if roles are predefined
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
         ]);
 
-        $user->update($request->only(['voornaam', 'email', 'role']));
+        // Update the user's details
+        $user->update([
+            'voornaam' => $request->input('voornaam'),
+            'email' => $request->input('email')
+        ]);
 
-        return redirect()->route('admin.admin')->with('success', 'Admin updated successfully.');
+        // Use Spatie's syncRoles to update the role
+
+        return redirect()->route('admin.edit', $user->id)->with('success', 'Admin updated successfully');
+    }
+
+    // Delete an admin
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('admin')->with('success', 'Admin deleted successfully.');
     }
 }
