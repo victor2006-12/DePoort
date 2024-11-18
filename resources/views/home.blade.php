@@ -6,13 +6,7 @@
 @endsection
 
 @section('navbar')
-<div class="navbar">
-    < class="navbar-nav">
-        <a href="#" class="nav-link active">Home</a>
-        <a href="#" class="nav-link">Kalender</a>
-        <a href="#" class="nav-link">Contact</a>
-</div>
-</div>
+
 @endsection
 
 
