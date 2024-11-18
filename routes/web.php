@@ -46,7 +46,7 @@ Route::post('account/update', [AccountController::class, 'update'])->name('accou
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 //dokter page routes
-Route::get('/dokter', [DokterController::class, 'index']);
+Route::get('/dokter', [DokterController::class, 'index']) ->name('dokterpagina');
 //->middleware(['auth', 'verified'])->name('dokter');
 //Get Dokter details
 Route::get('/dokter/details/{id}', [DokterController::class, 'details']);

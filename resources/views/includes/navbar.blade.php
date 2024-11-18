@@ -63,6 +63,13 @@
                             <a class="nav-link" href="{{ route('adminpagina') }}">Adminpagina</a>
                         </li>
                     @endif
+                @if (Auth::user() && Auth::user()->hasRole('dokter'))
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dokterpagina') }}">DokterPagina</a>
+                  </li> 
+                
+                @endif
                 
             </ul>
         </div>

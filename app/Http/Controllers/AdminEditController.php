@@ -43,6 +43,6 @@ class AdminEditController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.admin')->with('success', 'Admin deleted successfully.');
+        return redirect()->route('admin')->with('success', 'Admin deleted successfully.');
     }
 }
