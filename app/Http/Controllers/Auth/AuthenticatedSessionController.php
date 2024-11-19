@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
     {
         //check of het account is geactiveerd
         $user = User::where('email', $request->email)->first();
-        if (!$user->geactiveerd) {
+        if (is_null($user) || !$user->geactiveerd) {
             return back()->withErrors(['email' => 'Uw account is nog niet geactiveerd.']);
         }
 
