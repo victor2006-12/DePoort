@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout')
 
 @section('content')
 <div class="container">
@@ -14,18 +14,14 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{ old('voornaam', $user->voornaam) }}" required>
-        </div>
+            <input type="text" class="form-control" id="name" name="voornaam" value="{{ old('voornaam', $user->voornaam) }}" required>
+            </div>
 
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
         </div>
 
-        <div class="mb-3">
-            <label for="role" class="form-label">Role</label>
-            <input type="text" class="form-control" id="role" name="role" value="{{ old('role', $user->role) }}" required>
-        </div>
 
         <button type="submit" class="btn btn-primary">Update Admin</button>
     </form>

@@ -6,6 +6,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\Toegang;
 use App\Models\Afspraak;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -39,7 +40,12 @@ class AdminController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('admin.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('admin.admin')->with('success', 'User deleted successfully.');
+    }
+    public function showAdmins()
+    {
+        $admins = User::role('admin')->get(); // Get users with the 'admin' role
+        dd($admins); // Dump the result to see it
     }
 
 
@@ -80,15 +86,15 @@ class AdminController extends Controller
         return redirect()->route('admin.meldingen')->with('success', 'Toegang vragen gestuurd!');
     }
 
-    //GET meldingInzien       (toeganggebruikers)
-    public function meldingInzien()
+    //GET meldingInzien (toegangGebruikers)
+    public function meldingInzien($id)
     {
         $userId = Toegang::where('afspraak_toegang', true)->pluck('gebruikers_id');
-        $getUsers = User::whereIn('id', $userId)->get();
+        $getUsers = User::where('id', $id)->get();
 
         $getAfspraken = Afspraak::whereIn('gebruikers_id', $userId)->get();
 
-        return view('admin.toegangGebruikers', compact('getUsers', 'getAfspraken'));
+        return view('admin.toegangGebruikers', ['id' => $id], compact('getUsers', 'getAfspraken'));
     }
 
     //GET edituser
@@ -127,7 +133,7 @@ class AdminController extends Controller
 
         $user->save();
 
-        return redirect()->route('admin.toegangGebruikers');
+        return redirect()->route('admin.toegangGebruikers', ['id' => $id]);
     }
 
     //GET editAfspraak
@@ -163,6 +169,77 @@ class AdminController extends Controller
 
         $afspraak->save();
 
-        return redirect()->route('admin.toegangGebruikers');
+        return redirect()->route('admin.toegangGebruikers', ['id' => $id]);
+    }
+
+    //GET create user
+    public function gebruikeraanmaken()
+    {
+        return view('admin.gebruikeraanmaken');
+    }
+
+    //POST create user
+    public function gebruikeraanmakenPOST(Request $request)
+    {
+        $request->validate([
+            'voornaam' => 'required|string|max:255',
+            'tussenvoegsel' => 'nullable|string|max:255',
+            'achternaam' => 'required|string|max:255',
+            'adres' => 'required|string|max:255',
+            'postcode' => 'required|string|max:255',
+            'woonplaats' => 'required|string|max:255',
+            'land' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]); 
+
+        $user = User::create([
+            'voornaam' => $request->input('voornaam'),
+            'tussenvoegsel' => $request->input('tussenvoegsel'),
+            'achternaam' => $request->input('achternaam'),
+            'adres' => $request->input('adres'),
+            'postcode' => $request->input('postcode'),
+            'woonplaats' => $request->input('woonplaats'),
+            'land' => $request->input('land'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+        ]);
+
+        return redirect()->route('adminpagina');
+    }
+
+    //GET admin/Activeren
+    public function activeren()
+    {
+        $users = User::where('geactiveerd', false)->get();
+
+        return view('admin.activeren', compact('users'));
+    }
+
+    //POST admin/Activeren
+    public function activerenPOST(Request $request, $id)
+    {
+        $user = User::FindOrFail($id);
+        $user->geactiveerd = true;
+        $user->save();
+
+        return redirect()->route('admin.activeren');
+    }
+
+    //GET admin/Deactiveren
+    public function deactiveren()
+    {
+        $users = User::where('geactiveerd', true)->get();
+
+        return view('admin.deactiveren', compact('users'));
+    }
+
+    //POST admin/Deactiveren
+    public function deactiverenPOST(Request $request, $id)
+    {
+        $user = User::FindOrFail($id);
+        $user->geactiveerd = false;
+        $user->save();
+
+        return redirect()->route('admin.deactiveren');
     }
 }
