@@ -1,8 +1,11 @@
 @extends('layout')
+@section('styles')
 
+@endsection
 @section('content')
 
 <div>
+    <div id="edit-page">
     <h1>Bewerk gebruiker</h1>
     <form action="{{ route('admin.updateuser', $user->id) }}" method="POST" style="display: flex; flex-direction: column">
         @csrf
@@ -16,10 +19,13 @@
         <input type="email" name="email" value="{{$user->email}}" placeholder="E-mail" required>
         <input type="submit" value="Bewerken">
     </form>
+</div>
+
     
+<div id="edit-appointments">
     <h1>Bewerk afspraak</h1>
     @foreach($afspraken as $afspraak)
-        <form action="{{ route('admin.updateAfspraak', $afspraak->afspraak_id) }}" method="POST" style="display: flex; flex-direction: column">
+        <form action="{{ route('admin.updateAfspraak', $afspraak->afspraak_id) }}" method="POST">
             @csrf                              
             <input type="hidden" name="gebruikers_id" value="{{$afspraak->gebruikers_id}}">
             <input type="hidden" name="dokter_id" value="{{$afspraak->dokter_id}}">
@@ -31,5 +37,6 @@
         </form>
     @endforeach    
 </div>
+
 
 @endsection

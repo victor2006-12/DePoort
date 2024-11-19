@@ -79,3 +79,117 @@ footer {
 .nav-link:hover {
     text-decoration: underline;
 }
+/* Stijl voor de 'Bewerk gebruiker' pagina */
+#edit-page {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#edit-page h1 {
+    color: #0056b3;
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #0056b3;
+    padding-bottom: 10px;
+}
+
+#edit-page form {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+#edit-page form input[type="text"],
+#edit-page form input[type="email"],
+#edit-page form input[type="date"],
+#edit-page form input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#edit-page form input[type="submit"] {
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#edit-page form input[type="submit"]:hover {
+    background-color: #003d80;
+}
+/* Stijl voor de 'Bewerk afspraak' sectie */
+#edit-appointments {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #f9f9f9;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#edit-appointments h1 {
+    color: #007b5e;
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #007b5e;
+    padding-bottom: 10px;
+}
+
+#edit-appointments form {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+#edit-appointments form input[type="text"],
+#edit-appointments form input[type="date"],
+#edit-appointments form input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#edit-appointments form input[type="submit"] {
+    background-color: #007b5e;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#edit-appointments form input[type="submit"]:hover {
+    background-color: #005a43;
+}
+
+/* Specifieke responsiviteit */
+@media (max-width: 600px) {
+    #edit-appointments {
+        padding: 15px;
+    }
+    #edit-appointments h1 {
+        font-size: 20px;
+    }
+    #edit-appointments form input[type="submit"] {
+        width: 100%;
+    }
+}

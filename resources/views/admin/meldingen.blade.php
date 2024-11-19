@@ -13,7 +13,7 @@
                 <select class="form-control" id="dokter_id" name="dokter_id" required>
                     <option value="" disabled selected>Kies een dokter</option>
                     @foreach ($dokters as $dokter)
-                        <option value="{{ $dokter->id }}">{{ $dokter->voornaam }} {{ $dokter->achternaam }}</option>
+                            <option value="{{ $dokter->id }}">{{ $dokter->voornaam }} {{ $dokter->achternaam }}</option>
                     @endforeach
                 </select>
                 <button type="submit">Toegang vragen</button>
