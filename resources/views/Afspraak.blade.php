@@ -15,7 +15,7 @@
     <h2>Afspraak maken</h2>
     <p>Maak hieronder een afspraak door het formulier in te vullen.</p>
 
-    <form action="/submit-appointment" method="POST">
+    <form action="{{  route('afspraak.store') }}" method="POST">
         @csrf
 
         <div class="mb-3">

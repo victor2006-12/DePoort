@@ -13,7 +13,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminClientController;
 use App\Http\Controllers\DokterController;
-
+use Spatie\GoogleCalendar\Event;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 
     // Afspraak page
     Route::get('/Afspraak', [AfspraakController::class, 'index']);
+    Route::post('/Afspraak', [AppointmentController::class, 'store'])->name('afspraak.store');
 
     // Contact page
     Route::get('/Contact', [ContactController::class, 'index']);

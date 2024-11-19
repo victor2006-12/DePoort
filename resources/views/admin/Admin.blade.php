@@ -50,13 +50,10 @@
                     <td>{{ $doctor->id }}</td>
                     <td>{{ $doctor->voornaam }}</td>
                     <td>{{ $doctor->email }}</td>
-                    <td>
-                      <!--  <a href="{{ route('admin.doctors.edit', $doctor->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('admin.doctors.destroy', $doctor->id) }}" method="POST" style="display:inline;">-->
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this doctor?');">Delete</button>
-                        </form>
+                    <td>                      
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this doctor?');">Delete</button>                        
                     </td>
                 </tr>
             @endforeach

@@ -29,6 +29,8 @@ class AppointmentController extends Controller
             'consult' => $request->consult,
         ]);
 
+        
+
         return redirect('/home')->with('success', 'Afspraak succesvol gemaakt!');
     }
 }

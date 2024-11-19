@@ -10,4 +10,6 @@ class AfspraakController extends Controller
     {
         return view('afspraak');
     }
+
+    
 }
