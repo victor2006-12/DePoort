@@ -7,6 +7,7 @@
 @endsection
 
 
+
 @section('content')
 <div class="clients-container">
     <h3>Cliënten</h3>

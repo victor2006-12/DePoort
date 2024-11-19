@@ -23,12 +23,12 @@
         <span class="ms-2">{{ $userName ?? 'Client Name' }}</span>
     </a>
 
-    <!-- Dropdown Menu -->
-    <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="clientDropdown">
-        <li><a class="dropdown-item" href="{{ url('account/manage') }}">Manage Account</a></li>
-        <li><a class="dropdown-item" href="{{ url('logout') }}">Sign Out</a></li>
-    </ul>
-</div>
+        <!-- Dropdown Menu -->
+        <ul class="dropdown-menu custom-dropdown-menu" aria-labelledby="clientDropdown">
+            <li><a class="dropdown-item" href="{{ url('account/manage') }}">Manage Account</a></li>
+            <li><a class="dropdown-item" href="{{ url('logout') }}">Sign Out</a></li>
+        </ul>
+    </div>
 </div>
 
 <nav class="navbar navbar-expand-lg">

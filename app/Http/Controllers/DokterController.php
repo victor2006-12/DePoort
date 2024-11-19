@@ -14,21 +14,29 @@ class DokterController extends Controller
 
     //GET index
     public function index()
-    {                
+    {
         $getUsers = User::all();
     
         //dokter.dokter want view zit in een submap
-        return view('dokter.dokter', compact('getUsers')); 
+
+        if(Auth::user() == null) {
+            return redirect('/login');
+        }
+        
+        $getUserId = Auth::user()->id;
+        $userName = User::find($getUserId)->voornaam;
+
+
+        return view('dokter.dokter', compact('getUsers', 'userName'));
     }
 
     //GET Details
     public function details($id)
     {
-        if($id == null)
-        {
+        if ($id == null) {
             return redirect('/dokter');
         }
-        
+
         $userGegevens = DB::select('SELECT * FROM users WHERE id = ?', [$id]);
 
         $consultGegevens = DB::select('SELECT * FROM afspraaks WHERE gebruikers_id = ?', [$id]);
@@ -39,8 +47,7 @@ class DokterController extends Controller
     //get editafspraak
     public function editafspraak($id)
     {
-        if($id == null)
-        {
+        if ($id == null) {
             return redirect('/dokter');
         }
 
@@ -53,8 +60,7 @@ class DokterController extends Controller
     //post editafspraak
     public function update(Request $request, $id)
     {
-        if($id == null)
-        {
+        if ($id == null) {
             return redirect('/dokter');
         }
 
@@ -82,39 +88,40 @@ class DokterController extends Controller
         $id = Auth::id();
 
         $meldingen = Toegang::where('dokter_id', $id)->where('verzoek_toegang', true)->get();
-        
-        if($meldingen->isNotEmpty())
-        {
+
+        if ($meldingen->isNotEmpty()) {
             $toegangId = $meldingen->first()->toegang_id;
-            
+
             $adminId = DB::table('toegangs')->where('toegang_id', $toegangId)->first()->admin_id;
             $verzoekVanAdmin = DB::table('users')->where('id', $adminId)->get();
-            
+
             $clientId = DB::table('toegangs')->where('toegang_id', $toegangId)->first()->gebruikers_id;
             $clientVerzoek = DB::table('users')->where('id', $clientId)->get();
 
+
+
             $toegangGegevens = Toegang::where('dokter_id', $id)
-            ->where('verzoek_toegang', true)
-            ->get()
-            ->map(function ($melding) //loopt door de meldingen heen
-            {
-                $melding->admin = DB::table('users')->where('id', $melding->admin_id)->first(); //haalt de admin gegevens op
-                $melding->client = DB::table('users')->where('id', $melding->gebruikers_id)->first(); //haalt de client gegevens op
-                return $melding; //geef de melding terug
-            });
-            return view('dokter.meldingen',compact('meldingen', 'toegangGegevens'));
-        }     
+                ->where('verzoek_toegang', true)
+                ->get()
+                ->map(function ($melding) //loopt door de meldingen heen
+                {
+                    $melding->admin = DB::table('users')->where('id', $melding->admin_id)->first(); //haalt de admin gegevens op
+                    $melding->client = DB::table('users')->where('id', $melding->gebruikers_id)->first(); //haalt de client gegevens op
+                    return $melding; //geef de melding terug
+                });
+            return view('dokter.meldingen', compact('meldingen', 'toegangGegevens'));
+        }
         return view('dokter.meldingen', compact('meldingen'));
     }
-    
+
     //POST medlingToestaan
     public function medlingToestaan($toegang_id)
-    {   
+    {
         $toegang = Toegang::findOrFail($toegang_id);
 
         $toegang->update([
             'afspraak_toegang' => true,
-            'verzoek_toegang'  => false,
+            'verzoek_toegang' => false,
         ]);
 
         $id = Auth::id();
@@ -130,12 +137,17 @@ class DokterController extends Controller
 
         $toegang->update([
             'afspraak_toegang' => false,
-            'verzoek_toegang'  => false,
-        ]); 
+            'verzoek_toegang' => false,
+        ]);
 
         $id = Auth::id();
         $meldingen = Toegang::where('dokter_id', $id)->where('verzoek_toegang', true)->get();
 
         return view('dokter.meldingen', compact('meldingen'));
     }
+
+        
 }
+
+
+

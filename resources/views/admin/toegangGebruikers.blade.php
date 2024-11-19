@@ -1,6 +1,9 @@
 @extends('layout')
 
 @section('content')
+    
+
+<link href="{{ asset('css/admintoegang.css') }}" rel="stylesheet" />
 
 <div class="container">
     <h1>Gebruikers met toegang</h1>
@@ -34,4 +37,5 @@
         @endforeach
     </p>
 </div>
+
 @endsection
