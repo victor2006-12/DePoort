@@ -19,12 +19,15 @@
         @csrf
 
         <div class="mb-3">
-            <label for="gebruikers_id" class="form-label">Gebruikers ID (voor nu invullen met 1)</label>
-            <input type="number" class="form-control" id="gebruikers_id" name="gebruikers_id" value="1" required>
+            <input type="hidden" class="form-control" id="gebruikers_id" name="gebruikers_id" value="{{ auth()->user()->id }}" required>
         </div>
         <div class="mb-3">
-            <label for="dokter_id" class="form-label">Dokter ID (voor nu invullen met 1)</label>
-            <input type="number" class="form-control" id="dokter_id" name="dokter_id" value="1" required>
+            <select class="form-control" id="dokter_id" name="dokter_id" required>
+                <option value="" disabled selected>Kies een dokter</option>
+                @foreach ($dokters as $dokter)
+                    <option value="{{ $dokter->id }}">{{ $dokter->voornaam }} {{ $dokter->achternaam }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
             <label for="datum_afspraak" class="form-label">Datum</label>

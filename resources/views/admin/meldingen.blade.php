@@ -10,11 +10,10 @@
                 <input type="hidden" name="gebruikers_id" value="{{ $user->id }}">
                 <input type="hidden" name="admin_id" value="{{ Auth::user()->id }}">
                 <label for="dokter">Kies dokter</label>
-                <select name="dokter" id="dokter">
-                    @foreach($getDokters as $dokter)
-                        <option value="{{ $dokter->id }}">
-                            {{ $dokter->voornaam }} {{ $dokter->tussenvoegsel }} {{ $dokter->achternaam }}
-                        </option>
+                <select class="form-control" id="dokter_id" name="dokter_id" required>
+                    <option value="" disabled selected>Kies een dokter</option>
+                    @foreach ($dokters as $dokter)
+                        <option value="{{ $dokter->id }}">{{ $dokter->voornaam }} {{ $dokter->achternaam }}</option>
                     @endforeach
                 </select>
                 <button type="submit">Toegang vragen</button>

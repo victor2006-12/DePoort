@@ -52,20 +52,15 @@ class AdminController extends Controller
     //GET meldingen
     public function meldingen()
     {
-        $getUser = User::get();
-
-        //gebruik dit later als dokter rol goed is ingesteld
-        //$getDokters = User::role('dokter')->get();
-
-        //nu ff dit toch
-        $getDokters = User::get();
+        $getUser = User::whereDoesntHave('roles')->get();
+        $dokters = User::role('dokter')->get();
 
         $getToegestaandeMeldingen = Toegang::where('afspraak_toegang', true)->get();
         $userId = Toegang::where('afspraak_toegang', true)->pluck('gebruikers_id'); 
         $getUsers = User::whereIn('id', $userId)->get();
         
 
-        return view('admin.meldingen', compact('getUser', 'getDokters', 'getUsers'));
+        return view('admin.meldingen', compact('getUser', 'dokters', 'getUsers'));
     }   
 
     //POST meldingen 
